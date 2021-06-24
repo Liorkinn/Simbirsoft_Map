@@ -77,11 +77,9 @@ namespace map
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,9 +175,9 @@ namespace map
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(6, 22);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(52, 21);
+            this.checkBox1.Size = new System.Drawing.Size(84, 21);
             this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Еда";
+            this.checkBox1.Text = "Питание";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click);
             // 
@@ -191,9 +189,9 @@ namespace map
             this.groupBox1.Controls.Add(this.checkBox5);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.3F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(978, 12);
+            this.groupBox1.Location = new System.Drawing.Point(978, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(120, 217);
+            this.groupBox1.Size = new System.Drawing.Size(334, 90);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Фильтры";
@@ -201,7 +199,7 @@ namespace map
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(6, 130);
+            this.checkBox2.Location = new System.Drawing.Point(179, 49);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(74, 21);
             this.checkBox2.TabIndex = 10;
@@ -212,11 +210,11 @@ namespace map
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(6, 103);
+            this.checkBox6.Location = new System.Drawing.Point(96, 22);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(68, 21);
+            this.checkBox6.Size = new System.Drawing.Size(193, 21);
             this.checkBox6.TabIndex = 11;
-            this.checkBox6.Text = "Места";
+            this.checkBox6.Text = "Достопримечательности";
             this.checkBox6.UseVisualStyleBackColor = true;
             this.checkBox6.Click += new System.EventHandler(this.checkBox6_Click);
             // 
@@ -224,7 +222,7 @@ namespace map
             // 
             this.checkBox9.AutoSize = true;
             this.checkBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.3F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox9.Location = new System.Drawing.Point(6, 76);
+            this.checkBox9.Location = new System.Drawing.Point(81, 49);
             this.checkBox9.Name = "checkBox9";
             this.checkBox9.Size = new System.Drawing.Size(92, 21);
             this.checkBox9.TabIndex = 12;
@@ -237,9 +235,9 @@ namespace map
             this.checkBox5.AutoSize = true;
             this.checkBox5.Location = new System.Drawing.Point(6, 49);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(97, 21);
+            this.checkBox5.Size = new System.Drawing.Size(69, 21);
             this.checkBox5.TabIndex = 10;
-            this.checkBox5.Text = "Гостиница";
+            this.checkBox5.Text = "Отели";
             this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.Click += new System.EventHandler(this.checkBox5_Click);
             // 
@@ -254,7 +252,7 @@ namespace map
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Location = new System.Drawing.Point(1104, 12);
+            this.groupBox2.Location = new System.Drawing.Point(978, 97);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(334, 614);
             this.groupBox2.TabIndex = 11;
@@ -270,14 +268,6 @@ namespace map
             this.textBox1.Size = new System.Drawing.Size(416, 153);
             this.textBox1.TabIndex = 12;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(768, 469);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(330, 157);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(434, 469);
@@ -289,9 +279,8 @@ namespace map
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1443, 634);
+            this.ClientSize = new System.Drawing.Size(1317, 624);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -310,7 +299,6 @@ namespace map
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -336,7 +324,6 @@ namespace map
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox2;
         private TextBox textBox1;
-        private PictureBox pictureBox1;
         private PictureBox pictureBox2;
     }
 }

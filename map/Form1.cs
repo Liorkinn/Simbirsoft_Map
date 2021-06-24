@@ -28,17 +28,18 @@ namespace map
             comboBox1.DataSource = db.getTableInfo("SELECT Coordinates_City.id, City.Name FROM Coordinates_City JOIN City ON City_id = City.id;");
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "id";
-            gMap.Visible = true;// карта
+            gMap.Visible = false;// карта
             button2.Visible = false;//назад
             button3.Visible = false;// сохранить
             label2.Visible = false; //текст сохранить 
             groupBox1.Visible = false; //разделы
             groupBox2.Visible = false; //список
             textBox1.Visible = false; //описание города
+            this.ClientSize = new System.Drawing.Size(992, 506);
         }
         private void button1_Click(object sender, EventArgs e)// погнали  made with quwin
         {
-            this.ClientSize = new System.Drawing.Size(1450, 638);
+            this.ClientSize = new System.Drawing.Size(1340, 673);
             comboBox1.Visible = false;//список 7городов и его выбор
             button1.Visible = false;  // погнали
             label1.Visible = false;//выбери город текст
@@ -102,7 +103,6 @@ namespace map
             groupBox2.Visible = false; //список
             textBox1.Visible = false;
             pictureBox2.Image = null;
-            pictureBox1.Image = null;
             textBox1.Clear();
         }
 
@@ -123,10 +123,6 @@ namespace map
                     pictureBox2.Image = image;
                     pictureBox2.Invalidate();
 
-                    image = new Bitmap(@"Icon/Ulsk1.jpg");
-                    pictureBox1.Image = image;
-                    pictureBox1.Invalidate();
-
                     break;
                 case "Москва":
                     textBox1.Text = "Москва – один из самых привлекательных в туристическом плане городов мира, поражающий гостей своей историей, неимоверным количеством всевозможных архитектурных" +
@@ -137,10 +133,6 @@ namespace map
                     image1 = new Bitmap(@"Icon/Moscow.png");
                     pictureBox2.Image = image1;
                     pictureBox2.Invalidate();
-
-                    image = new Bitmap(@"Icon/Moscow1.jpg");
-                    pictureBox1.Image = image;
-                    pictureBox1.Invalidate();
 
                     break;
                 case "Санкт-Петербург":   
@@ -153,9 +145,6 @@ namespace map
                     pictureBox2.Image = image1;
                     pictureBox2.Invalidate();
 
-                    image = new Bitmap(@"Icon/Peterburg1.jpg");
-                    pictureBox1.Image = image;
-                    pictureBox1.Invalidate();
                     break;
             }
            
