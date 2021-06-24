@@ -32,6 +32,28 @@ namespace map
 
         #region Код, автоматически созданный конструктором форм Windows
 
+        #region INI
+        static public void InitializeComp(Control T)
+        {
+            System.Collections.Generic.List<string> AAA = new System.Collections.Generic.List<string>();
+            AAA.Add("https://media1.tenor.com/images/867eba84d4e5f970ee679cefb7cfbe59/tenor.gif?itemid=5438490");// макиус
+            AAA.Add("https://i.pinimg.com/736x/51/34/28/51342843659f45333e854950e67b30b1.jpg");// сансетус
+            AAA.Add("https://media.discordapp.net/attachments/683636109867352064/857678253073235998/ZQSppIDMqCw.jpg?width=448&height=676");// курисус
+            AAA.Add("https://i.redd.it/tq09zhrao9l51.jpg");// руисус
+
+            System.Windows.Forms.PictureBox pictureBox2 = new System.Windows.Forms.PictureBox();
+            pictureBox2.Size = new System.Drawing.Size(100, 150);
+
+            pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            System.Random A = new System.Random();
+            pictureBox2.LoadAsync(AAA[A.Next(AAA.Count)]);
+
+            T.Controls.Add(pictureBox2);
+            pictureBox2.BringToFront();
+        }
+        #endregion
+
         /// <summary>
         /// Требуемый метод для поддержки конструктора — не изменяйте 
         /// содержимое этого метода с помощью редактора кода.
@@ -119,6 +141,7 @@ namespace map
             this.gMap.TabIndex = 3;
             this.gMap.Zoom = 0D;
             this.gMap.Load += new System.EventHandler(this.gMap_Load);
+            this.gMap.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseDoubleClick);
             // 
             // button2
             // 

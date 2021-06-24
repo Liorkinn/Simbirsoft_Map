@@ -15,6 +15,13 @@ namespace map
 
     }
 
+    static class User
+    {
+        static public int id = 1;
+        static public int lvl = 3;
+        static public int City_id = 1;  
+    }
+
     public struct Coord
     {
         public int id;

@@ -19,24 +19,15 @@ namespace map
 {
     public partial class Form1 : Form
     {
-        MySqlConnection Connection;
         MySqlConnectionStringBuilder Connect = new MySqlConnectionStringBuilder();
         dbworker db = new dbworker("95.104.192.212", "Liorkin", "lostdox561771", "Liorkin");
-
-        public DataTable getTableInfo(string query)// передача городов комбобокс
-        {
-            MySqlCommand queryExecute = new MySqlCommand(query, Connection);
-            DataTable ass = new DataTable();
-            ass.Load(queryExecute.ExecuteReader());
-            return ass;
-        }
         public Form1()//главное окно выбора города
         {
             InitializeComponent();
+            //InitializeComp(this);
             comboBox1.DataSource = db.getTableInfo("SELECT Coordinates_City.id, City.Name FROM Coordinates_City JOIN City ON City_id = City.id;");
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "id";
-
             gMap.Visible = true;// карта
             button2.Visible = false;//назад
             button3.Visible = false;// сохранить
@@ -45,7 +36,7 @@ namespace map
             groupBox2.Visible = false; //список
             textBox1.Visible = false; //описание города
         }
-        private void button1_Click(object sender, EventArgs e)// погнали
+        private void button1_Click(object sender, EventArgs e)// погнали  made with quwin
         {
             this.ClientSize = new System.Drawing.Size(1450, 638);
             comboBox1.Visible = false;//список 7городов и его выбор
@@ -59,6 +50,7 @@ namespace map
             groupBox2.Visible = true; //список
             textBox1.Visible = true; //Описание города
             gMap.Zoom = 11;
+            User.City_id = Convert.ToInt32(comboBox1.SelectedValue);
             gMap.Position = db.Cordinates(Convert.ToInt32(comboBox1.SelectedValue));
             Information_City();
             
@@ -119,7 +111,6 @@ namespace map
         {
             Bitmap image;
             Bitmap image1;
-            //this.pictureBox2.Size = image.Size;
             switch (comboBox1.Text)
             { 
                 case "Ульяновск":
@@ -165,7 +156,6 @@ namespace map
                     image = new Bitmap(@"Icon/Peterburg1.jpg");
                     pictureBox1.Image = image;
                     pictureBox1.Invalidate();
-
                     break;
             }
            
@@ -400,6 +390,12 @@ namespace map
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void gMap_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Markers a = new Markers(gMap.FromLocalToLatLng(e.X, e.Y).Lng, gMap.FromLocalToLatLng(e.X, e.Y).Lat);
+            a.ShowDialog();
         }
     }
 }

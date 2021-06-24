@@ -19,8 +19,6 @@ namespace map
 
     class dbworker
     {
-
-
         MySqlConnection Connection;
         MySqlConnectionStringBuilder Connect = new MySqlConnectionStringBuilder();
 
@@ -89,14 +87,12 @@ namespace map
             finally { Connection.Close(); }
 
             return new PointLatLng(bd[0].x, bd[0].y);
-
-
         }
 
-        public List<Coord> Food(int id) //метки для еды
+        public List<Coord> Food(int id) //метки
         {
             MySqlCommand command = Connection.CreateCommand();
-            command.CommandText = "SELECT X, Y, id FROM Coordinats_Place WHERE Place_id = "+ id.ToString() +";";
+            command.CommandText = "SELECT X, Y, id FROM a WHERE Place_id = "+ id.ToString() +" and City_id = "+ User.City_id + ";";
             List<Coord> bd = new List<Coord>();
             try
             {
@@ -127,139 +123,62 @@ namespace map
             return bd;
         }
 
-        //public List<Coord> Place() //метки для мест
-        //{
-        //    MySqlCommand command = Connection.CreateCommand();
-        //    command.CommandText = "SELECT X, Y FROM Coordinats_Place WHERE Place_id = 2;";
-        //    List<Coord> bd = new List<Coord>();
-        //    try
-        //    {
-        //        Connection.Open();
-        //        using (DbDataReader reader = command.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                Coord databd = new Coord
-        //                {
-        //                    id = reader.GetInt32(2),
-        //                    x = reader.GetDouble(0),
-        //                    y = reader.GetDouble(1),
-        //                };
-        //                bd.Add(databd);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
+        public void download(int Place_id, int City_id, string name, string adress, string info, double x, double y)
+        {
 
-        //        Connection.Close();
-        //    }
-        //    return bd;
-        //}
+            MySqlCommand command = Connection.CreateCommand();
 
-        //public List<Coord> Flat() //метки для квартиры
-        //{
-        //    MySqlCommand command = Connection.CreateCommand();
-        //    command.CommandText = "SELECT X, Y FROM Coordinats_Place WHERE Place_id = 4;";
-        //    List<Coord> bd = new List<Coord>();
-        //    try
-        //    {
-        //        Connection.Open();
-        //        using (DbDataReader reader = command.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                Coord databd = new Coord
-        //                {
-        //                    id = reader.GetInt32(2),
-        //                    x = reader.GetDouble(0),
-        //                    y = reader.GetDouble(1),
-        //                };
-        //                bd.Add(databd);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
+            // command.CommandText = "INSERT INTO info(name, surname, otch) VALUES(?name, ?surname, ?otch)";
+            command.CommandText = " INSERT INTO `Liorkin`.`Coordinats_Place` (`Place_id`, `X`, `Y`) VALUES(?Place_id, ?x, ?y);";
+           
+            command.Parameters.Add("?Place_id", MySqlDbType.Int32).Value = Place_id;
+            command.Parameters.Add("?X", MySqlDbType.Double).Value = x;
+            command.Parameters.Add("?Y", MySqlDbType.Double).Value = y;
+            try
+            {
+                Connection.Open();
+                command.ExecuteNonQuery();
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            command = Connection.CreateCommand();
+            /////////////////////////////////////////////////////////////
+            command.CommandText = "INSERT INTO `Liorkin`.`Attractions` (`User_id`, `Place_id`, `City_id`, `Coordinats_Place_id`, `Name`, `Adress`, `Information`) VALUES (?User_id, ?Place_id, ?City_id, (SELECT MAX(id) FROM `Liorkin`.`Coordinats_Place`), ?Name, ?Adress, ?Information);";
 
-        //        Connection.Close();
-        //    }
-        //    return bd;
-        //}
+            command.Parameters.Add("?User_id", MySqlDbType.Int32).Value = User.id;
+            command.Parameters.Add("?Place_id", MySqlDbType.Int32).Value = Place_id;
+            command.Parameters.Add("?City_id", MySqlDbType.Int32).Value = User.City_id;
+            command.Parameters.Add("?Name", MySqlDbType.VarChar).Value = name;
+            command.Parameters.Add("?Adress", MySqlDbType.VarChar).Value = adress;
+            command.Parameters.Add("?Information", MySqlDbType.VarChar).Value = info;
 
-        //public List<Coord> Hotel() //метки для гостиниц
-        //{
-        //    MySqlCommand command = Connection.CreateCommand();
-        //    command.CommandText = "SELECT X, Y FROM Coordinats_Place WHERE Place_id = 3";
-        //    List<Coord> bd = new List<Coord>();
-        //    try
-        //    {
-        //        Connection.Open();
-        //        using (DbDataReader reader = command.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                Coord databd = new Coord
-        //                {
-        //                    x = reader.GetDouble(0),
-        //                    y = reader.GetDouble(1),
-        //                };
-        //                bd.Add(databd);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
 
-        //        Connection.Close();
-        //    }
-        //    return bd;
-        //}
 
-        //public List<Coord> Poster() //метки для афишы
-        //{
-        //    MySqlCommand command = Connection.CreateCommand();
-        //    command.CommandText = "SELECT X, Y FROM Coordinats_Place WHERE Place_id = 5";
-        //    List<Coord> bd = new List<Coord>();
-        //    try
-        //    {
-        //        Connection.Open();
-        //        using (DbDataReader reader = command.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                Coord databd = new Coord
-        //                {
-        //                    x = reader.GetDouble(0),
-        //                    y = reader.GetDouble(1),
-        //                };
-        //                bd.Add(databd);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
+            try
+            {
+                Connection.Open();
+                command.ExecuteNonQuery();
 
-        //        Connection.Close();
-        //    }
-        //    return bd;
-        //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+        }
+
+
         public DataTable getTableInfo(string query)//Combobox_worker
         {
             Connection.Open();
@@ -269,7 +188,6 @@ namespace map
             Connection.Close();
             return ass;
         }
-
 
     }
 }
