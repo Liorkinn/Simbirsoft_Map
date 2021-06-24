@@ -54,8 +54,13 @@ namespace map
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -96,7 +101,7 @@ namespace map
             this.gMap.GrayScaleMode = false;
             this.gMap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMap.LevelsKeepInMemmory = 5;
-            this.gMap.Location = new System.Drawing.Point(12, 12);
+            this.gMap.Location = new System.Drawing.Point(12, 1);
             this.gMap.MarkersEnabled = true;
             this.gMap.MaxZoom = 2;
             this.gMap.MinZoom = 2;
@@ -110,14 +115,14 @@ namespace map
             this.gMap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMap.ShowTileGridLines = false;
-            this.gMap.Size = new System.Drawing.Size(960, 614);
+            this.gMap.Size = new System.Drawing.Size(960, 462);
             this.gMap.TabIndex = 3;
             this.gMap.Zoom = 0D;
             this.gMap.Load += new System.EventHandler(this.gMap_Load);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(897, 603);
+            this.button2.Location = new System.Drawing.Point(897, 435);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -127,7 +132,7 @@ namespace map
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 603);
+            this.button3.Location = new System.Drawing.Point(12, 440);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 5;
@@ -138,7 +143,7 @@ namespace map
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(93, 608);
+            this.label2.Location = new System.Drawing.Point(93, 445);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 6;
@@ -220,7 +225,7 @@ namespace map
             this.panel1.AutoScroll = true;
             this.panel1.Location = new System.Drawing.Point(6, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(322, 589);
+            this.panel1.Size = new System.Drawing.Size(322, 478);
             this.panel1.TabIndex = 10;
             // 
             // groupBox2
@@ -233,10 +238,38 @@ namespace map
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Список меток";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 469);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(416, 153);
+            this.textBox1.TabIndex = 12;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(768, 469);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(330, 157);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(434, 469);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(328, 157);
+            this.pictureBox2.TabIndex = 14;
+            this.pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1443, 638);
+            this.ClientSize = new System.Drawing.Size(1443, 634);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
@@ -250,9 +283,12 @@ namespace map
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,6 +312,9 @@ namespace map
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private TextBox textBox1;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }
 

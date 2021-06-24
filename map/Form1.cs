@@ -36,12 +36,14 @@ namespace map
             comboBox1.DataSource = db.getTableInfo("SELECT Coordinates_City.id, City.Name FROM Coordinates_City JOIN City ON City_id = City.id;");
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "id";
+
             gMap.Visible = true;// карта
             button2.Visible = false;//назад
             button3.Visible = false;// сохранить
             label2.Visible = false; //текст сохранить 
             groupBox1.Visible = false; //разделы
             groupBox2.Visible = false; //список
+            textBox1.Visible = false; //описание города
         }
         private void button1_Click(object sender, EventArgs e)// погнали
         {
@@ -55,8 +57,11 @@ namespace map
             button3.Visible = true;// сохранить
             groupBox1.Visible = true; //разделы
             groupBox2.Visible = true; //список
+            textBox1.Visible = true; //Описание города
             gMap.Zoom = 11;
             gMap.Position = db.Cordinates(Convert.ToInt32(comboBox1.SelectedValue));
+            Information_City();
+            
         }
         private void gMap_Load(object sender, EventArgs e)// загрузка карты и ее настройка
         {
@@ -103,7 +108,69 @@ namespace map
             button3.Visible = false;// сохранить
             groupBox1.Visible = false; //разделы
             groupBox2.Visible = false; //список
+            textBox1.Visible = false;
+            pictureBox2.Image = null;
+            pictureBox1.Image = null;
+            textBox1.Clear();
         }
+
+
+        public void Information_City()
+        {
+            Bitmap image;
+            Bitmap image1;
+            //this.pictureBox2.Size = image.Size;
+            switch (comboBox1.Text)
+            { 
+                case "Ульяновск":
+                    textBox1.Text = "Ульяновск — административный центр Ульяновской области Российской Федерации; важный промышленный и культурный центр Поволжья;" +
+                    " узел железных и автомобильных дорог (на Москву, Казань, Уфу, Саратов); речной порт; авиалиниями связан со многими " +
+                    "городами страны и зарубежья. Расположен на берегу Куйбышевского водохранилища, в 893 км к юго-востоку от Москвы." +
+                    " Население – около 700 тыс. человек. Разделен на 4 района. Имеет радиально-прямоугольную планировку.";
+
+                    image = new Bitmap(@"Icon/Ulskk.png");
+                    pictureBox2.Image = image;
+                    pictureBox2.Invalidate();
+
+                    image = new Bitmap(@"Icon/Ulsk1.jpg");
+                    pictureBox1.Image = image;
+                    pictureBox1.Invalidate();
+
+                    break;
+                case "Москва":
+                    textBox1.Text = "Москва – один из самых привлекательных в туристическом плане городов мира, поражающий гостей своей историей, неимоверным количеством всевозможных архитектурных" +
+                        " достопримечательностей, музеев, театров, галерей, которые не сможет перечислить ни один искусствовед. В то же время Москва – город глубоких контрастов. Здесь можно увидеть " +
+                        "очередь за «Бэнтли» и нищих в переходах метро, деревянные избы в тупиках Китай-города и стеклянные небоскрёбы Москва-Сити, ощутить деревенскую тишину переулков Замоскворечья " +
+                        "и шум мегаполиса в деловых кварталах."; 
+                    
+                    image1 = new Bitmap(@"Icon/Moscow.png");
+                    pictureBox2.Image = image1;
+                    pictureBox2.Invalidate();
+
+                    image = new Bitmap(@"Icon/Moscow1.jpg");
+                    pictureBox1.Image = image;
+                    pictureBox1.Invalidate();
+
+                    break;
+                case "Санкт-Петербург":   
+                default:
+                    textBox1.Text = "Санкт-Петербург - самый северный из числа крупнейших городов мира. Его географические координаты - 59°57' северной широты и 30°19' " +
+                        "восточной долготы. 60-я параллель, на которой находится северная столица России, проходит через Гренландию, Аляску и столицу Норвегии Осло. Площадь " +
+                        "города составляет 606 кв. км, а с пригородами -1451 кв. км. Петербург делится на 19 административных районов и 111 муниципальных образований.";
+
+                    image1 = new Bitmap(@"Icon/Peterburg.jpg");
+                    pictureBox2.Image = image1;
+                    pictureBox2.Invalidate();
+
+                    image = new Bitmap(@"Icon/Peterburg1.jpg");
+                    pictureBox1.Image = image;
+                    pictureBox1.Invalidate();
+
+                    break;
+            }
+           
+        }
+
         private void button3_Click(object sender, EventArgs e) // скрин карты в текушем месте
         {
             try
@@ -328,6 +395,11 @@ namespace map
                     }
                 }
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
