@@ -85,6 +85,7 @@ namespace map
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(360, 288);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(5);

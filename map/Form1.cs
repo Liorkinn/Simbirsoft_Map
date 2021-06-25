@@ -92,6 +92,7 @@ namespace map
         }    
         private void button2_Click(object sender, EventArgs e) // кнопка назад вернутся к меню выбора города
         {
+            this.ClientSize = new System.Drawing.Size(992, 506);
             gMap.Visible = false;// карта
             comboBox1.Visible = true; //список 7городов и его выбор
             button1.Visible = true; // погнали
@@ -101,6 +102,56 @@ namespace map
             button3.Visible = false;// сохранить
             groupBox1.Visible = false; //разделы
             groupBox2.Visible = false; //список
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox6.Checked = false;
+            checkBox9.Checked = false;
+            checkBox5.Checked = false;
+            gMap.Overlays.Remove(ListOfFood);
+            ListOfFood.Clear();
+            gMap.Overlays.Remove(ListOfFlat);
+            ListOfFlat.Clear();
+            gMap.Overlays.Remove(ListOfPlace);
+            ListOfPlace.Clear();
+            gMap.Overlays.Remove(ListOfHotel);
+            ListOfHotel.Clear();
+            gMap.Overlays.Remove(ListOfPoster);
+            ListOfPoster.Clear();
+            for (int i = panel1.Controls.Count - 1; i >= 0; i += -1)
+            {
+                if (panel1.Controls[i].Tag.ToString() == "Place")
+                {
+                    panel1.Controls.Remove(panel1.Controls[i]);
+                }
+            }
+            for (int i = panel1.Controls.Count - 1; i >= 0; i += -1)
+            {
+                if (panel1.Controls[i].Tag.ToString() == "Food")
+                {
+                    panel1.Controls.Remove(panel1.Controls[i]);
+                }
+            }
+            for (int i = panel1.Controls.Count - 1; i >= 0; i += -1)
+            {
+                if (panel1.Controls[i].Tag.ToString() == "Flat")
+                {
+                    panel1.Controls.Remove(panel1.Controls[i]);
+                }
+            }
+            for (int i = panel1.Controls.Count - 1; i >= 0; i += -1)
+            {
+                if (panel1.Controls[i].Tag.ToString() == "Hotel")
+                {
+                    panel1.Controls.Remove(panel1.Controls[i]);
+                }
+            }
+            for (int i = panel1.Controls.Count - 1; i >= 0; i += -1)
+            {
+                if (panel1.Controls[i].Tag.ToString() == "Poster")
+                {
+                    panel1.Controls.Remove(panel1.Controls[i]);
+                }
+            }
             textBox1.Visible = false;
             pictureBox2.Image = null;
             textBox1.Clear();
