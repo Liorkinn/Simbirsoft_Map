@@ -20,14 +20,16 @@ namespace map
     {
         GMapControl Search;
         Coord Cord;
-
+        int id;
+        dbworker db = new dbworker(bd_CON_VAL.server, bd_CON_VAL.user, bd_CON_VAL.pass, "Liorkin");
         public UserControl1(Coord iD, Control G)
         {
             Cord = iD;
-            dbworker db = new dbworker("95.104.192.212", "Liorkin", "lostdox561771", "Liorkin");
             List<string> a = db.A(iD.id);
             InitializeComponent(a[0], a[1], a[2]);
+            id = Convert.ToInt32(a[3]);
             this.Dock = DockStyle.Top;
+            CheckBox1.Checked = db.Visited_Check(id);
             Search = (GMapControl)G;
         }
 
@@ -40,6 +42,10 @@ namespace map
         {
             Search.Position = new PointLatLng(Cord.x, Cord.y);
             Search.Zoom = 17;
+        }
+        private void CheckBox1_Click(object sender, EventArgs e)
+        {
+            db.visited(id, CheckBox1.Checked);
         }
     }
 }

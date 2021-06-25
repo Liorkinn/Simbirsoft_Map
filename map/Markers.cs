@@ -20,7 +20,7 @@ namespace map
     public partial class Markers : Form
     {
         double X, Y;
-        dbworker db = new dbworker("95.104.192.212", "Liorkin", "lostdox561771", "Liorkin");
+        dbworker db = new dbworker(bd_CON_VAL.server, bd_CON_VAL.user, bd_CON_VAL.pass, "Liorkin");
         public Markers(double x, double y)
         {
             InitializeComponent();
@@ -38,6 +38,11 @@ namespace map
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if ((textBox1.Text == "")|| (textBox2.Text == "") || (textBox3.Text == "")|| (comboBox1.Text == ""))
+            {
+                MessageBox.Show("Заполните все поля!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             db.download(Convert.ToInt32(comboBox1.SelectedValue), User.City_id, textBox1.Text, textBox2.Text, textBox3.Text, X, Y);
             this.Close();
         }

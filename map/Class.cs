@@ -12,7 +12,7 @@ namespace map
 {
     static class Class
     {
-
+        
     }
 
     static class User
@@ -20,6 +20,13 @@ namespace map
         static public int id = 1;
         static public int lvl = 3;
         static public int City_id = 1;  
+    }
+
+    static class bd_CON_VAL
+    {
+        static public string server = "95.104.192.212";
+        static public string user = "Liorkin";
+        static public string pass = "lostdox561771";
     }
 
     public struct Coord

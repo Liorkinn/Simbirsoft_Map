@@ -20,7 +20,7 @@ namespace map
     public partial class Form1 : Form
     {
         MySqlConnectionStringBuilder Connect = new MySqlConnectionStringBuilder();
-        dbworker db = new dbworker("95.104.192.212", "Liorkin", "lostdox561771", "Liorkin");
+        dbworker db = new dbworker(bd_CON_VAL.server, bd_CON_VAL.user, bd_CON_VAL.pass, "Liorkin");
         public Form1()//главное окно выбора города
         {
             InitializeComponent();
@@ -28,14 +28,16 @@ namespace map
             comboBox1.DataSource = db.getTableInfo("SELECT Coordinates_City.id, City.Name FROM Coordinates_City JOIN City ON City_id = City.id;");
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "id";
-            gMap.Visible = false;// карта
+            gMap.Visible = true;// карта
             button2.Visible = false;//назад
             button3.Visible = false;// сохранить
             label2.Visible = false; //текст сохранить 
             groupBox1.Visible = false; //разделы
             groupBox2.Visible = false; //список
             textBox1.Visible = false; //описание города
-            this.ClientSize = new System.Drawing.Size(992, 506);
+            gMap.Position = new PointLatLng(54.313928, 48.40341);
+            gMap.Zoom = 11;
+            this.ClientSize = new System.Drawing.Size(970, 470);
         }
         private void button1_Click(object sender, EventArgs e)// погнали  made with quwin
         {
@@ -49,8 +51,8 @@ namespace map
             button3.Visible = true;// сохранить
             groupBox1.Visible = true; //разделы
             groupBox2.Visible = true; //список
-            textBox1.Visible = true; //Описание города
             gMap.Zoom = 11;
+            textBox1.Visible = true; //Описание города
             User.City_id = Convert.ToInt32(comboBox1.SelectedValue);
             gMap.Position = db.Cordinates(Convert.ToInt32(comboBox1.SelectedValue));
             Information_City();
@@ -92,8 +94,8 @@ namespace map
         }    
         private void button2_Click(object sender, EventArgs e) // кнопка назад вернутся к меню выбора города
         {
-            this.ClientSize = new System.Drawing.Size(992, 506);
-            gMap.Visible = false;// карта
+            this.ClientSize = new System.Drawing.Size(986, 498);
+            gMap.Visible = true;// карта
             comboBox1.Visible = true; //список 7городов и его выбор
             button1.Visible = true; // погнали
             label1.Visible = true; //выбери город текст
@@ -436,6 +438,12 @@ namespace map
         {
             Markers a = new Markers(gMap.FromLocalToLatLng(e.X, e.Y).Lng, gMap.FromLocalToLatLng(e.X, e.Y).Lat);
             a.ShowDialog();
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            gMap.Position = db.Cordinates(Convert.ToInt32(comboBox1.SelectedValue));
+            gMap.Zoom = 11;
         }
     }
 }

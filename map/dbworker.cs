@@ -36,7 +36,7 @@ namespace map
         public List<String> A(int id)
         {
             MySqlCommand command = Connection.CreateCommand();
-            command.CommandText = "SELECT NAME, adress, information FROM  Attractions WHERE Coordinats_Place_id = " + id + ";";
+            command.CommandText = "SELECT NAME, adress, information, id FROM  Attractions WHERE Coordinats_Place_id = " + id + ";";
             List<String> bd = new List<String>();
             try
             {
@@ -48,6 +48,7 @@ namespace map
                         bd.Add(reader.GetString(0));
                         bd.Add(reader.GetString(1));
                         bd.Add(reader.GetString(2));
+                        bd.Add(reader.GetString(3));
                     }
                 }
             }
@@ -123,6 +124,60 @@ namespace map
             return bd;
         }
 
+        public void visited(int Attraction_id, bool da)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = da ? "INSERT INTO `Liorkin`.`Visited` (`User_id`, `Attraction_id`) VALUES(?User.id, ?Attraction_id);" : "DELETE FROM `Liorkin`.`Visited` WHERE  `User_id`= ?User.id AND Attraction_id =?Attraction_id;";
+            //command.CommandText = "INSERT INTO `Liorkin`.`Visited` (`User_id`, `Attraction_id`) VALUES(?User.id, ?Attraction_id);";
+            command.Parameters.Add("?User.id", MySqlDbType.Int32).Value = User.id;
+            command.Parameters.Add("?Attraction_id", MySqlDbType.Int32).Value = Attraction_id;
+            try
+            {
+                Connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
+        public bool Visited_Check(int Attraction_id)
+        {          
+            MySqlCommand command = Connection.CreateCommand();
+            // command.CommandText = "INSERT INTO info(name, surname, otch) VALUES(?name, ?surname, ?otch)";
+            command.CommandText = "SELECT COUNT(*) FROM Visited WHERE User_id = "+ User.id + " AND Attraction_id = " + Attraction_id + ";";
+            bool check = false;
+            try
+            {
+                Connection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        check = Convert.ToBoolean(reader.GetInt32(0));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+
+                Connection.Close();
+            }
+            return check;
+        }
+
+
+    
         public void download(int Place_id, int City_id, string name, string adress, string info, double x, double y)
         {
 
@@ -177,7 +232,6 @@ namespace map
             }
 
         }
-
 
         public DataTable getTableInfo(string query)//Combobox_worker
         {
