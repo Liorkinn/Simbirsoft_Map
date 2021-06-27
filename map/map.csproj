@@ -99,13 +99,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class.cs" />
-    <Compile Include="dbworker.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="BuyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Class.cs" />
+    <Compile Include="dbworker.cs" />
+    <Compile Include="General.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="General.Designer.cs">
+      <DependentUpon>General.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Markers.cs">
       <SubType>Form</SubType>
@@ -115,15 +121,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControl1.cs">
+    <Compile Include="Point.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
+    <Compile Include="Point.Designer.cs">
+      <DependentUpon>Point.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RenameProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsrCab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="BuyForm.resx" />
+    <EmbeddedResource Include="General.resx">
+      <DependentUpon>General.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx" />
     <EmbeddedResource Include="Markers.resx">
       <DependentUpon>Markers.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,9 +153,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControl1.resx">
-      <DependentUpon>UserControl1.cs</DependentUpon>
+    <EmbeddedResource Include="Point.resx">
+      <DependentUpon>Point.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="register.resx" />
+    <EmbeddedResource Include="RenameProfile.resx" />
+    <EmbeddedResource Include="UsrCab.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

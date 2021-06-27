@@ -17,9 +17,9 @@ namespace map
 
     static class User
     {
-        static public int id = 1;
-        static public int lvl = 3;
-        static public int City_id = 1;  
+        static public int id=0;
+        static public int lvl;
+        static public int City_id;  
     }
 
     static class bd_CON_VAL

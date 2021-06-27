@@ -17,11 +17,11 @@ using GMap.NET.WindowsForms.ToolTips;
 
 namespace map
 {
-    public partial class Form1 : Form
+    public partial class General : Form
     {
         MySqlConnectionStringBuilder Connect = new MySqlConnectionStringBuilder();
         dbworker db = new dbworker(bd_CON_VAL.server, bd_CON_VAL.user, bd_CON_VAL.pass, "Liorkin");
-        public Form1()//главное окно выбора города
+        public General()//главное окно выбора города
         {
             InitializeComponent();
             //InitializeComp(this);
@@ -35,6 +35,7 @@ namespace map
             groupBox1.Visible = false; //разделы
             groupBox2.Visible = false; //список
             textBox1.Visible = false; //описание города
+            button6.Visible = false;
             gMap.Position = new PointLatLng(54.313928, 48.40341);
             gMap.Zoom = 11;
             this.ClientSize = new System.Drawing.Size(970, 470);
@@ -51,6 +52,9 @@ namespace map
             button3.Visible = true;// сохранить
             groupBox1.Visible = true; //разделы
             groupBox2.Visible = true; //список
+            button6.Location = new System.Drawing.Point(863, 469);
+            button5.Visible = false;
+            button4.Visible = false;
             gMap.Zoom = 11;
             textBox1.Visible = true; //Описание города
             User.City_id = Convert.ToInt32(comboBox1.SelectedValue);
@@ -103,7 +107,9 @@ namespace map
             button2.Visible = false;//назад
             button3.Visible = false;// сохранить
             groupBox1.Visible = false; //разделы
-            groupBox2.Visible = false; //список
+            groupBox2.Visible = false; //список 
+            button5.Visible = true;
+            button4.Visible = true;
             checkBox1.Checked = false;
             checkBox2.Checked = false;
             checkBox6.Checked = false;
@@ -200,7 +206,6 @@ namespace map
 
                     break;
             }
-           
         }
 
         private void button3_Click(object sender, EventArgs e) // скрин карты в текушем месте
@@ -260,7 +265,7 @@ namespace map
                     marker.ToolTipText = "Ресторан";
                     ListOfFood.Markers.Add(marker);
 
-                    UserControl1 a = new UserControl1(ListWithPoinsOfFood[i], gMap);
+                    Point a = new Point(ListWithPoinsOfFood[i], gMap);
                     a.Tag = "Food";
                     panel1.Controls.Add(a);
                 }
@@ -298,7 +303,7 @@ namespace map
                     marker.ToolTipText = "Место";
                     ListOfPlace.Markers.Add(marker);
 
-                    UserControl1 a = new UserControl1(ListWithPoinsOfPlace[i], gMap);
+                    Point a = new Point(ListWithPoinsOfPlace[i], gMap);
                     a.Tag = "Place";
                     panel1.Controls.Add(a);
                 }
@@ -336,7 +341,7 @@ namespace map
                     marker.ToolTipText = "Квартира";
                     ListOfFlat.Markers.Add(marker);
 
-                    UserControl1 a = new UserControl1(ListWithPoinsOfFlat[i], gMap);
+                    Point a = new Point(ListWithPoinsOfFlat[i], gMap);
                     a.Tag = "Flat";
                     panel1.Controls.Add(a);
                 }
@@ -373,7 +378,7 @@ namespace map
                     marker.ToolTipText = "Гостиница";
                     ListOfHotel.Markers.Add(marker);
 
-                    UserControl1 a = new UserControl1(ListWithPoinsOfHotel[i], gMap);
+                    Point a = new Point(ListWithPoinsOfHotel[i], gMap);
                     a.Tag = "Hotel";
                     panel1.Controls.Add(a);
                 }
@@ -410,7 +415,7 @@ namespace map
                     marker.ToolTipText = "Афиша";
                     ListOfPoster.Markers.Add(marker);
 
-                    UserControl1 a = new UserControl1(ListWithPoinsOfPoster[i], gMap);
+                    Point a = new Point(ListWithPoinsOfPoster[i], gMap);
                     a.Tag = "Poster";
                     panel1.Controls.Add(a);
                 }
@@ -428,12 +433,6 @@ namespace map
                 }
             }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void gMap_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Markers a = new Markers(gMap.FromLocalToLatLng(e.X, e.Y).Lng, gMap.FromLocalToLatLng(e.X, e.Y).Lat);
@@ -444,6 +443,28 @@ namespace map
         {
             gMap.Position = db.Cordinates(Convert.ToInt32(comboBox1.SelectedValue));
             gMap.Zoom = 11;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            register reg = new register();
+            reg.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Login log = new Login();
+            log.ShowDialog();
+            if (User.id != 0) 
+            {
+                button6.Visible=true;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            UsrCab lk = new UsrCab(User.id);
+            lk.Show();
         }
     }
 }

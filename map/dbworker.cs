@@ -22,7 +22,7 @@ namespace map
         MySqlConnection Connection;
         MySqlConnectionStringBuilder Connect = new MySqlConnectionStringBuilder();
 
-        public dbworker(string server, string user, string pass, string database) //Database Worker
+        public dbworker(string server, string user, string pass, string database) //Database Worker yes
         {
             Connect.Server = server;
             Connect.UserID = user;
@@ -60,7 +60,7 @@ namespace map
             return bd;
         }
 
-        public PointLatLng Cordinates(int id) //стартовая метка города
+        public PointLatLng Cordinates(int id) //стартовая метка города 
         {
             MySqlCommand command = Connection.CreateCommand();
             command.CommandText = "SELECT Coordinates_City.X,Coordinates_City.Y FROM Coordinates_City WHERE City_id = " + id + ";";
@@ -128,7 +128,6 @@ namespace map
         {
             MySqlCommand command = Connection.CreateCommand();
             command.CommandText = da ? "INSERT INTO `Liorkin`.`Visited` (`User_id`, `Attraction_id`) VALUES(?User.id, ?Attraction_id);" : "DELETE FROM `Liorkin`.`Visited` WHERE  `User_id`= ?User.id AND Attraction_id =?Attraction_id;";
-            //command.CommandText = "INSERT INTO `Liorkin`.`Visited` (`User_id`, `Attraction_id`) VALUES(?User.id, ?Attraction_id);";
             command.Parameters.Add("?User.id", MySqlDbType.Int32).Value = User.id;
             command.Parameters.Add("?Attraction_id", MySqlDbType.Int32).Value = Attraction_id;
             try
@@ -149,8 +148,7 @@ namespace map
 
         public bool Visited_Check(int Attraction_id)
         {          
-            MySqlCommand command = Connection.CreateCommand();
-            // command.CommandText = "INSERT INTO info(name, surname, otch) VALUES(?name, ?surname, ?otch)";
+            MySqlCommand command = Connection.CreateCommand();          
             command.CommandText = "SELECT COUNT(*) FROM Visited WHERE User_id = "+ User.id + " AND Attraction_id = " + Attraction_id + ";";
             bool check = false;
             try
@@ -176,14 +174,105 @@ namespace map
             return check;
         }
 
+        public void Add_User(string name, string surname, string login, string pass1, string pass2, int flag)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = "INSERT INTO `Users` (`Name`, `Surname`, `login`, `password`, `flag`) VALUES (?name, ?surname, ?login, ?password, ?flag);";
+            if (pass1 == pass2)
+            {
+                command.Parameters.Add("?name", MySqlDbType.VarChar).Value = name;
+                command.Parameters.Add("?surname", MySqlDbType.VarChar).Value = surname;
+                command.Parameters.Add("?login", MySqlDbType.VarChar).Value = login;
+                command.Parameters.Add("?password", MySqlDbType.VarChar).Value = pass1;
+                command.Parameters.Add("?flag", MySqlDbType.VarChar).Value = flag;
 
-    
+                Connection.Open();
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("Аккаунт успешно создан!");
+
+                    
+                    int IDoo = User.id = USER_ID(login);
+                    command.CommandText = "INSERT INTO `Users_Info` (`Users_id`, `secname`, `age`, `about_me`, `gender`,`city`) VALUES (@Users_id_value, @secname_value, @age_value, @about_me_value, @gender_value, @city_value)";
+                    string empty = null;
+
+                    command.Parameters.Add("@Users_id_value", MySqlDbType.VarChar).Value = IDoo;
+                    command.Parameters.Add("@secname_value", MySqlDbType.VarChar).Value = empty;
+                    command.Parameters.Add("@age_value", MySqlDbType.VarChar).Value = empty;
+                    command.Parameters.Add("@about_me_value", MySqlDbType.VarChar).Value = empty;
+                    command.Parameters.Add("@gender_value", MySqlDbType.VarChar).Value = empty;
+                    command.Parameters.Add("@city_value", MySqlDbType.VarChar).Value = empty;
+
+                    
+                    if (command.ExecuteNonQuery() == 1)
+                    {
+                    }
+
+                }
+
+                else
+                    MessageBox.Show("Error");
+
+                Connection.Close();
+            }
+            else
+                MessageBox.Show("Пароли не совпадают");
+        }
+
+        public int USER_ID(string login)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT id FROM Users WHERE login = '{login}'";
+            object value = command.ExecuteScalar();
+            int ID = Convert.ToInt32(value);
+            return ID;
+        }
+
+        public bool login(string login, string pass)
+        {
+            if ((login == "Логин") || (pass == "Пароль"))
+            {
+                MessageBox.Show("Вы заполнили не все поля...", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return false;
+            }
+            else
+            {
+             
+                DataTable table = new DataTable();
+                Connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+                MySqlCommand command = Connection.CreateCommand();
+                command.CommandText = "SELECT * FROM `Users` WHERE `login` = @LoginUserlock AND `password` = @PasswordUserlock";             
+                command.Parameters.Add("@LoginUserlock", MySqlDbType.VarChar).Value = login;
+                command.Parameters.Add("@PasswordUserlock", MySqlDbType.VarChar).Value = pass;
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+
+                Connection.Close();
+                if (table.Rows.Count > 0)
+                {
+                    User.id = Convert.ToInt32(table.Rows[0].ItemArray[0]);
+                    User.lvl = Convert.ToInt32(table.Rows[0].ItemArray[5]);
+                    MessageBox.Show("Вы успешно авторизовались!");
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Ошибочка... Проверьте логин и пароль!");
+                    return false;
+                }
+                
+            }
+        }
+
+
+
         public void download(int Place_id, int City_id, string name, string adress, string info, double x, double y)
         {
 
             MySqlCommand command = Connection.CreateCommand();
-
-            // command.CommandText = "INSERT INTO info(name, surname, otch) VALUES(?name, ?surname, ?otch)";
             command.CommandText = " INSERT INTO `Liorkin`.`Coordinats_Place` (`Place_id`, `X`, `Y`) VALUES(?Place_id, ?x, ?y);";
            
             command.Parameters.Add("?Place_id", MySqlDbType.Int32).Value = Place_id;
@@ -232,6 +321,287 @@ namespace map
             }
 
         }
+
+        public Boolean check(string log1)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            DataTable table = new DataTable();
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            command.CommandText = "SELECT * FROM `Users` WHERE `login` = @LoginUserlock ";
+            command.Parameters.Add("@LoginUserlock", MySqlDbType.VarChar).Value = log1;
+
+            Connection.Open();
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+            if (table.Rows.Count > 0)
+            {
+                MessageBox.Show("Логин занят!");
+                return true;
+            }
+            else
+            {
+                Connection.Close();
+                return false;
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////
+        public string Usr_name(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT Name FROM Users WHERE id = {id}";
+            object value = command.ExecuteScalar();
+            string name = Convert.ToString(value);
+            Connection.Close();
+            return name;
+        }
+        public string Usr_surname(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT Surname FROM Users WHERE id = {id}";
+            object value = command.ExecuteScalar();
+            string surname = Convert.ToString(value);
+            Connection.Close();
+            return surname;
+        }
+
+        public string Usr_secname(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT secname FROM Users_Info WHERE Users_id = {id}";
+            object value = command.ExecuteScalar();
+            string secname = Convert.ToString(value);
+            Connection.Close();
+            return secname;
+        }
+
+        public string Usr_age(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT age FROM Users_Info WHERE Users_id = {id}";
+            object value = command.ExecuteScalar();
+            string age = Convert.ToString(value);
+            Connection.Close();
+            return age;
+        }
+
+        public string Usr_city(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT city FROM Users_Info WHERE Users_id = {id}";
+            object value = command.ExecuteScalar();
+            string name = Convert.ToString(value);
+            Connection.Close();
+            return name;
+        }
+
+        public string Usr_PN(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT telephone FROM Users_Info WHERE Users_id = {id}";
+            object value = command.ExecuteScalar();
+            string Telephone = Convert.ToString(value);
+            Connection.Close();
+            return Telephone;
+        }
+
+        public int Usr_status(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT flag FROM Users WHERE id = {id}";
+            object value = command.ExecuteScalar();
+            int status = Convert.ToInt32(value);
+            Connection.Close();
+            return status;
+        }
+
+        public string Usr_gender(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT gender FROM Users_Info WHERE Users_id = {id}";
+            object value = command.ExecuteScalar();
+            string gender = Convert.ToString(value);
+            Connection.Close();
+            return gender;
+        }
+
+        public string Usr_about(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT about_me FROM Users_Info WHERE Users_id = {id}";
+            object value = command.ExecuteScalar();
+            string about = Convert.ToString(value);
+            Connection.Close();
+            return about;
+        }
+
+        public string Usr_password(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT password FROM Users WHERE id = {id}";
+            object value = command.ExecuteScalar();
+            string password = Convert.ToString(value);
+            Connection.Close();
+            return password;
+        }
+
+        public void Set_password(int id, string password)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"UPDATE Users SET password = '{password}' WHERE  id = {id}";
+            command.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+        public void Set_name(int id, string name)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"UPDATE Users SET name = '{name}' WHERE  id = {id}";
+            command.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+        public void Set_surname(int id, string surname)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"UPDATE Users SET surname = '{surname}' WHERE  id = {id}";
+            command.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+        public void Set_secname(int id, string secname)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"UPDATE Users_Info SET secname = '{secname}' WHERE  Users_id = {id}";
+            command.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+        public void Set_city(int id, string city)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"UPDATE Users_Info SET city = '{city}' WHERE  Users_id = {id}";
+            command.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+        public void Set_gender(int id, string gender)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"UPDATE Users_Info SET gender = '{gender}' WHERE  Users_id = {id}";
+            command.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+        public void Set_aboutme(int id, string aboutme)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"UPDATE Users_Info SET about_me = '{aboutme}' WHERE  Users_id = {id}";
+            command.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+        public void Set_age(int id, string age)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"UPDATE Users_Info SET age = '{age}' WHERE  Users_id = {id}";
+            command.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+
+        public List<string> selectattr(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT Attractions.Name FROM Visited JOIN Attractions ON Attraction_id = Attractions.id WHERE Visited.User_id = {id}";
+            MySqlDataReader reader = command.ExecuteReader();
+            List<string> names = new List<string>();
+            while (reader.Read())
+                names.Add(reader[0].ToString());
+            Connection.Close();
+            return names;
+
+        }
+        public List<string> selectattraddress(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT Attractions.Adress FROM Visited JOIN Attractions ON Attraction_id = Attractions.id WHERE Visited.User_id = {id}";
+            MySqlDataReader reader = command.ExecuteReader();
+            List<string> names = new List<string>();
+            while (reader.Read())
+                names.Add(reader[0].ToString());
+            Connection.Close();
+            return names;
+
+        }
+        public List<string> selectcity(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT City.Name FROM Visited_City JOIN City ON City_id = City.id WHERE Visited_City.User_id = {id}";
+            MySqlDataReader reader = command.ExecuteReader();
+            List<string> names = new List<string>();
+            while (reader.Read())
+                names.Add(reader[0].ToString());
+            Connection.Close();
+            return names;
+        }
+
+        public void Set_rate(int stat, int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"UPDATE Users SET flag = '{stat}' WHERE  id = {id}";
+            User.lvl = stat;
+            command.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+        public string RateInfo(int id)
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT name FROM Rate WHERE id = {id}";
+            object value = command.ExecuteScalar();
+            string RateName = Convert.ToString(value);
+            Connection.Close();
+            return RateName;
+        }
+
+        public int Get_MaxRate()
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT MAX(id) FROM Rate";
+            object value = command.ExecuteScalar();
+            int maxid = Convert.ToInt32(value);
+            Connection.Close();
+            return maxid;
+        }
+
+        ////////////////////////////////////////////////////////////////////
 
         public DataTable getTableInfo(string query)//Combobox_worker
         {

@@ -16,13 +16,13 @@ using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms.ToolTips;
 namespace map
 {
-    public partial class UserControl1 : UserControl
+    public partial class Point : UserControl
     {
         GMapControl Search;
         Coord Cord;
         int id;
         dbworker db = new dbworker(bd_CON_VAL.server, bd_CON_VAL.user, bd_CON_VAL.pass, "Liorkin");
-        public UserControl1(Coord iD, Control G)
+        public Point(Coord iD, Control G)
         {
             Cord = iD;
             List<string> a = db.A(iD.id);

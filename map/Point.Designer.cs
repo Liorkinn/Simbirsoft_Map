@@ -1,7 +1,7 @@
 ﻿
 namespace map
 {
-    partial class UserControl1
+    partial class Point
     {
         /// <summary> 
         /// Обязательная переменная конструктора.

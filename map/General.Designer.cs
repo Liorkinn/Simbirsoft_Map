@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace map
 {
-    partial class Form1
+    partial class General
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -78,6 +78,9 @@ namespace map
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -145,9 +148,9 @@ namespace map
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(897, 435);
+            this.button2.Location = new System.Drawing.Point(863, 435);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(109, 23);
             this.button2.TabIndex = 4;
             this.button2.Text = "Назад";
             this.button2.UseVisualStyleBackColor = true;
@@ -248,15 +251,15 @@ namespace map
             this.panel1.AutoScroll = true;
             this.panel1.Location = new System.Drawing.Point(6, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(322, 478);
+            this.panel1.Size = new System.Drawing.Size(322, 510);
             this.panel1.TabIndex = 10;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Location = new System.Drawing.Point(978, 97);
+            this.groupBox2.Location = new System.Drawing.Point(978, 91);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(334, 614);
+            this.groupBox2.Size = new System.Drawing.Size(334, 535);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Список меток";
@@ -267,7 +270,7 @@ namespace map
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(416, 153);
+            this.textBox1.Size = new System.Drawing.Size(416, 157);
             this.textBox1.TabIndex = 12;
             // 
             // pictureBox2
@@ -278,10 +281,43 @@ namespace map
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
             // 
-            // Form1
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(863, 406);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(109, 23);
+            this.button4.TabIndex = 15;
+            this.button4.Text = "Регистрация";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(863, 377);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(109, 23);
+            this.button5.TabIndex = 16;
+            this.button5.Text = "Вход";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(863, 348);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(109, 23);
+            this.button6.TabIndex = 17;
+            this.button6.Text = "Личный кабинет";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // General
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1316, 635);
+            this.ClientSize = new System.Drawing.Size(1314, 630);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox2);
@@ -294,10 +330,9 @@ namespace map
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.gMap);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form1";
+            this.Name = "General";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -327,6 +362,9 @@ namespace map
         private System.Windows.Forms.GroupBox groupBox2;
         private TextBox textBox1;
         private PictureBox pictureBox2;
+        private Button button4;
+        private Button button5;
+        private Button button6;
     }
 }
 
