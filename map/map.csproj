@@ -104,6 +104,12 @@
     </Compile>
     <Compile Include="Class.cs" />
     <Compile Include="dbworker.cs" />
+    <Compile Include="EditMarkers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditMarkers.Designer.cs">
+      <DependentUpon>EditMarkers.cs</DependentUpon>
+    </Compile>
     <Compile Include="General.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,11 +142,20 @@
     <Compile Include="UsrCab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <EmbeddedResource Include="BuyForm.resx" />
+    <EmbeddedResource Include="BuyForm.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BuyForm.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditMarkers.resx">
+      <DependentUpon>EditMarkers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="General.resx">
       <DependentUpon>General.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx" />
+    <EmbeddedResource Include="Login.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Markers.resx">
       <DependentUpon>Markers.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,9 +171,18 @@
     <EmbeddedResource Include="Point.resx">
       <DependentUpon>Point.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="register.resx" />
-    <EmbeddedResource Include="RenameProfile.resx" />
-    <EmbeddedResource Include="UsrCab.resx" />
+    <EmbeddedResource Include="register.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>register.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RenameProfile.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RenameProfile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsrCab.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UsrCab.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

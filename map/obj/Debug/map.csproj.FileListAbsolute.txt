@@ -153,3 +153,4 @@ C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.Point.resources
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.register.resources
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.RenameProfile.resources
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.UsrCab.resources
+C:\Users\user\Desktop\Simbirsoft_Map\map\obj\Debug\map.EditMarkers.resources

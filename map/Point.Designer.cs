@@ -102,7 +102,6 @@ namespace map
 
         #endregion
 
-        private MySql.Data.MySqlClient.CustomInstaller customInstaller1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox CheckBox1;
         private System.Windows.Forms.Button button1;

@@ -680,6 +680,114 @@ namespace map
         }
 
 
+
+        public List<int> Edit_Markers()
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = "SELECT Attractions.Coordinats_Place_id FROM Attractions WHERE User_id = " + User.id + ";";
+            List<int> bd = new List<int>();
+            try
+            {
+                Connection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        bd.Add(reader.GetInt32(0));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally 
+            {
+                Connection.Close();
+            }
+            return bd;
+        }
+
+        public List<string> Edit_Information(int id)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = "SELECT a.Name, a.Adress, a.Information FROM a WHERE id = " + id + ";";
+            List<string> bd = new List<string>();
+            try
+            {
+                Connection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        bd.Add(reader.GetString(0));
+                        bd.Add(reader.GetString(1));
+                        bd.Add(reader.GetString(2));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            return bd;
+        }
+
+
+
+        public void Delete_Markers(int id)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = "DELETE FROM `Liorkin`.`Coordinats_Place` WHERE  `id`=" + id + ";";
+            try
+            {
+                Connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
+        public void Update_Markers(int id, string name, string adress, string info)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = "UPDATE `Liorkin`.`Attractions` SET `Name`= ?name, `Adress`= ?adress, `Information`= ?info  WHERE  `Coordinats_Place_id`= ?id;";
+            //"DELETE FROM `Liorkin`.`Visited_City` WHERE  `User_id`= ?User.id AND City_id =?City_id;";
+
+            command.Parameters.Add("?name", MySqlDbType.VarChar).Value = name;
+            command.Parameters.Add("?adress", MySqlDbType.VarChar).Value = adress;
+            command.Parameters.Add("?info", MySqlDbType.VarChar).Value = info;
+            command.Parameters.Add("?id", MySqlDbType.Int32).Value = id;
+            try
+            {
+                Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+
+                Connection.Close();
+            }
+        }
+
+
+        // UPDATE `Liorkin`.`Attractions` SET `Name`='s', `Adress`='s', `Information`='s' WHERE  `id`=53;
+
         public DataTable getTableInfo(string query)//Combobox_worker
         {
             Connection.Open();

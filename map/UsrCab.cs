@@ -10,6 +10,7 @@ namespace map
         int globalid = 0;
 
         private Label Subscribe;
+        private Panel panel1;
         dbworker db = new dbworker(bd_CON_VAL.server, bd_CON_VAL.user, bd_CON_VAL.pass, "Liorkin");
         public UsrCab(int id)
         {
@@ -32,11 +33,16 @@ namespace map
             else if (db.Usr_status(id) == 2)
             {
                 Subscribe.Text = "Подписка: Арендодатель";
-
             }
             else if (db.Usr_status(id) == 3)
             {
-                Subscribe.Text = "Подписка: Бизнес";
+                Subscribe.Text = "Подписка: Бизнес";// made with quwin
+            }
+            foreach(int Sunset_shimmer in db.Edit_Markers())
+            {
+                EditMarkers edit = new EditMarkers(Sunset_shimmer);
+                edit.Dock = DockStyle.Top;
+                panel1.Controls.Add(edit);
             }
             List<string> places = new List<string>();
             List<string> adresses = new List<string>();
@@ -79,6 +85,7 @@ namespace map
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.Subscribe = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -99,7 +106,7 @@ namespace map
             // 
             // RenUser
             // 
-            this.RenUser.Location = new System.Drawing.Point(540, 371);
+            this.RenUser.Location = new System.Drawing.Point(760, 371);
             this.RenUser.Margin = new System.Windows.Forms.Padding(2);
             this.RenUser.Name = "RenUser";
             this.RenUser.Size = new System.Drawing.Size(139, 37);
@@ -116,7 +123,7 @@ namespace map
             this.TabControl.Margin = new System.Windows.Forms.Padding(2);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(513, 324);
+            this.TabControl.Size = new System.Drawing.Size(362, 324);
             this.TabControl.TabIndex = 8;
             // 
             // tabPage1
@@ -126,7 +133,7 @@ namespace map
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(505, 298);
+            this.tabPage1.Size = new System.Drawing.Size(354, 298);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Места";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -138,7 +145,7 @@ namespace map
             this.PlaceBox.Margin = new System.Windows.Forms.Padding(2);
             this.PlaceBox.Multiline = true;
             this.PlaceBox.Name = "PlaceBox";
-            this.PlaceBox.Size = new System.Drawing.Size(498, 292);
+            this.PlaceBox.Size = new System.Drawing.Size(344, 292);
             this.PlaceBox.TabIndex = 1;
             // 
             // tabPage2
@@ -148,7 +155,7 @@ namespace map
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(505, 298);
+            this.tabPage2.Size = new System.Drawing.Size(354, 298);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Города";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -167,7 +174,7 @@ namespace map
             // 
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new System.Drawing.Point(529, 111);
+            this.groupBox1.Location = new System.Drawing.Point(749, 271);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(165, 95);
             this.groupBox1.TabIndex = 11;
@@ -202,11 +209,20 @@ namespace map
             this.Subscribe.TabIndex = 12;
             this.Subscribe.Text = "Подписка";
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Location = new System.Drawing.Point(379, 111);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(340, 297);
+            this.panel1.TabIndex = 13;
+            // 
             // UsrCab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 424);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Subscribe);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.All_About);
@@ -215,7 +231,7 @@ namespace map
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UsrCab";
-            this.Text = "UsrCab";
+            this.Text = "Личный кабинет";
             this.Load += new System.EventHandler(this.UsrCab_Load);
             this.TabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

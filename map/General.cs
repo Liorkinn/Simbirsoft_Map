@@ -57,7 +57,7 @@ namespace map
             button6.Location = new System.Drawing.Point(863, 469);
             button5.Visible = false;
             button4.Visible = false;
-            checkBox3.Visible = true;
+            if (User.id == 0) { checkBox3.Visible = false; } else { checkBox3.Visible = true; }
             gMap.Zoom = 11;
             textBox1.Visible = true; //Описание города
             User.City_id = Convert.ToInt32(comboBox1.SelectedValue);
@@ -120,6 +120,7 @@ namespace map
             checkBox6.Checked = false;
             checkBox9.Checked = false;
             checkBox5.Checked = false;
+            button6.Location = new System.Drawing.Point(863, 348);
             gMap.Overlays.Remove(ListOfFood);
             ListOfFood.Clear();
             gMap.Overlays.Remove(ListOfFlat);
@@ -440,8 +441,11 @@ namespace map
         }
         private void gMap_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Markers a = new Markers(gMap.FromLocalToLatLng(e.X, e.Y).Lng, gMap.FromLocalToLatLng(e.X, e.Y).Lat);
-            a.ShowDialog();
+            if ((User.id != 0)&& button2.Visible)
+            {
+                Markers a = new Markers(gMap.FromLocalToLatLng(e.X, e.Y).Lng, gMap.FromLocalToLatLng(e.X, e.Y).Lat);
+                a.ShowDialog();
+            }
         }
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
