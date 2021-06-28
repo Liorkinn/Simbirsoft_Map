@@ -99,6 +99,7 @@ namespace map
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(214, 135);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button2
             // 
@@ -172,5 +173,10 @@ namespace map
         private System.Windows.Forms.TextBox password_string;
         private System.Windows.Forms.TextBox login_string;
         private System.Windows.Forms.Button button2;
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

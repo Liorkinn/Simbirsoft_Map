@@ -603,6 +603,22 @@ namespace map
 
         ////////////////////////////////////////////////////////////////////
 
+        public string PointInfo(int id) //вывод мето пользователя
+        {
+            Connection.Open();
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = $"SELECT NAME, Adress FROM Attractions WHERE User_id = {id}";
+            object value = command.ExecuteScalar();
+            string PointName = Convert.ToString(value);
+            Connection.Close();
+            return PointName;
+        }
+
+
+
+
+
+       
         public DataTable getTableInfo(string query)//Combobox_worker
         {
             Connection.Open();

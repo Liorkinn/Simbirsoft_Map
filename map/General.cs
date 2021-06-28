@@ -464,7 +464,7 @@ namespace map
         private void button6_Click(object sender, EventArgs e)
         {
             UsrCab lk = new UsrCab(User.id);
-            lk.Show();
+            lk.ShowDialog(); 
         }
     }
 }

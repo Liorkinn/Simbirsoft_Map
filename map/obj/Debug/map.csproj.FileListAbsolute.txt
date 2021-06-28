@@ -97,9 +97,7 @@ C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\bin\Debug\System.Memory.xml
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.csprojAssemblyReference.cache
-C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.Form1.resources
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.Properties.Resources.resources
-C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.UserControl1.resources
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.csproj.GenerateResource.cache
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.csproj.CoreCompileInputs.cache
 C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.csproj.CopyComplete
@@ -147,3 +145,11 @@ C:\Users\user\Desktop\Simbirsoft_Map\map\obj\Debug\map.Login.resources
 C:\Users\user\Desktop\Simbirsoft_Map\map\obj\Debug\map.BuyForm.resources
 C:\Users\user\Desktop\Simbirsoft_Map\map\obj\Debug\map.RenameProfile.resources
 C:\Users\user\Desktop\Simbirsoft_Map\map\obj\Debug\map.UsrCab.resources
+C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.BuyForm.resources
+C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.General.resources
+C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.Login.resources
+C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.Markers.resources
+C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.Point.resources
+C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.register.resources
+C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.RenameProfile.resources
+C:\Users\Liorkin\Desktop\Simbirsoft_Map\map\obj\Debug\map.UsrCab.resources
