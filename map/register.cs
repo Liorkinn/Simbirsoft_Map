@@ -46,7 +46,7 @@ namespace map
             if (name1.Text == "Имя")
             {
                 name1.Text = "";
-                name1.ForeColor = Color.LightGray;
+                name1.ForeColor = Color.Black;
             }
         }
 
@@ -143,12 +143,12 @@ namespace map
 
             }
 
-            if (!Regex.Match(name1.Text, @"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$").Success)
+            if (!Regex.Match(name1.Text, @"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,50}$").Success)
             {
                 MessageBox.Show("Имя не должно содержить цифр и символов!(кроме необходимых) )", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
             }
-            if (!Regex.Match(name2.Text, @"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$").Success)
+            if (!Regex.Match(name2.Text, @"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,20}$").Success)
             {
                 MessageBox.Show("Фамилия не должна содержить цифр и символов!(кроме необходимых) )", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;

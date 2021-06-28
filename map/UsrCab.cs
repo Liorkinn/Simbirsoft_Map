@@ -20,7 +20,6 @@ namespace map
             CityBox.ReadOnly = true;
             All_About.Text = $"{db.Usr_name(id)} {db.Usr_surname(id)} {db.Usr_secname(id)} {db.Usr_age(id)} {db.Usr_city(id)}";
             globalid = id;
-
             comboBox1.DataSource = db.getTableInfo("SELECT * FROM Rate;");
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "id";
@@ -41,11 +40,12 @@ namespace map
             }
             List<string> places = new List<string>();
             List<string> adresses = new List<string>();
+            List<string> citys = new List<string>();
             places = db.selectattr(globalid);
             adresses = db.selectattraddress(globalid);
+            //citys = db.selectcitys(globalid);
             for (int i = 0; i < db.selectattr(globalid).Count; i++)
-                PlaceBox.Text += $"{places[i]} {adresses[i]}" + Environment.NewLine;
-            List<string> citys = new List<string>();
+                PlaceBox.Text += $"{places[i]} {adresses[i]} " + Environment.NewLine;
             citys = db.selectcity(globalid);
             for (int i = 0; i < db.selectcity(globalid).Count; i++)
                 CityBox.Text += citys[i] + Environment.NewLine;
@@ -54,7 +54,6 @@ namespace map
         {
 
         }
-
         private void RenUser_Click(object sender, EventArgs e)
         {
             RenameProfile shitass = new RenameProfile(globalid);
@@ -67,12 +66,6 @@ namespace map
             //AttrListBox.GetItemChecked()
         }
 
-        private void BuyPrem_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-            BuyForm window = new BuyForm(globalid);
-            window.ShowDialog();
-        }
         private void InitializeComponent()
         {
             this.All_About = new System.Windows.Forms.Label();
@@ -82,7 +75,6 @@ namespace map
             this.PlaceBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.CityBox = new System.Windows.Forms.TextBox();
-            this.BuyPrem = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -107,10 +99,10 @@ namespace map
             // 
             // RenUser
             // 
-            this.RenUser.Location = new System.Drawing.Point(767, 376);
+            this.RenUser.Location = new System.Drawing.Point(540, 371);
             this.RenUser.Margin = new System.Windows.Forms.Padding(2);
             this.RenUser.Name = "RenUser";
-            this.RenUser.Size = new System.Drawing.Size(150, 37);
+            this.RenUser.Size = new System.Drawing.Size(139, 37);
             this.RenUser.TabIndex = 7;
             this.RenUser.Text = "Редактировать профиль";
             this.RenUser.UseVisualStyleBackColor = true;
@@ -171,26 +163,16 @@ namespace map
             this.CityBox.Size = new System.Drawing.Size(498, 292);
             this.CityBox.TabIndex = 0;
             // 
-            // BuyPrem
-            // 
-            this.BuyPrem.Location = new System.Drawing.Point(767, 323);
-            this.BuyPrem.Name = "BuyPrem";
-            this.BuyPrem.Size = new System.Drawing.Size(150, 37);
-            this.BuyPrem.TabIndex = 10;
-            this.BuyPrem.Text = "Хуйня удали кнопку";
-            this.BuyPrem.UseVisualStyleBackColor = true;
-            this.BuyPrem.Click += new System.EventHandler(this.BuyPrem_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new System.Drawing.Point(752, 132);
+            this.groupBox1.Location = new System.Drawing.Point(529, 111);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(165, 95);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Подписка";
+            this.groupBox1.Text = "Профиль";
             // 
             // button1
             // 
@@ -198,7 +180,7 @@ namespace map
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 32);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Оформить";
+            this.button1.Text = "Изменить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -228,7 +210,6 @@ namespace map
             this.Controls.Add(this.Subscribe);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.All_About);
-            this.Controls.Add(this.BuyPrem);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.RenUser);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -251,7 +232,6 @@ namespace map
         private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button BuyPrem;
         private System.Windows.Forms.TextBox CityBox;
         private GroupBox groupBox1;
         private Button button1;

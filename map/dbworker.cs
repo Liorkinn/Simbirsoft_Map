@@ -541,8 +541,22 @@ namespace map
                 names.Add(reader[0].ToString());
             Connection.Close();
             return names;
-
         }
+
+
+        //public List<string> selectcitys(int id)
+        //{
+        //    Connection.Open();
+        //    MySqlCommand command = Connection.CreateCommand();
+        //    command.CommandText = $"SELECT Attractions.City_id FROM Visited JOIN Attractions ON Attraction_id = Attractions.id WHERE Visited.User_id = {id} JOIN City ON City_id = City.id";
+        //    MySqlDataReader reader = command.ExecuteReader();
+        //    List<string> names = new List<string>();
+        //    while (reader.Read())
+        //        names.Add(reader[0].ToString());
+        //    Connection.Close();
+        //    return names;
+        //}
+
         public List<string> selectattraddress(int id)
         {
             Connection.Open();
@@ -554,7 +568,6 @@ namespace map
                 names.Add(reader[0].ToString());
             Connection.Close();
             return names;
-
         }
         public List<string> selectcity(int id)
         {
@@ -616,9 +629,57 @@ namespace map
 
 
 
+        public void Visited_City(int City_id, bool da)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = da ? "INSERT INTO `Liorkin`.`Visited_City` (`User_id`, `City_id`) VALUES (?User.id, ?City_id);" : "DELETE FROM `Liorkin`.`Visited_City` WHERE  `User_id`= ?User.id AND City_id =?City_id;";
+            command.Parameters.Add("?User.id", MySqlDbType.Int32).Value = User.id;
+            command.Parameters.Add("?City_id", MySqlDbType.Int32).Value = City_id;           
+            try
+            {
+                Connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
+        public bool Visited_Check_City(int City_id)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            command.CommandText = "SELECT COUNT(*) FROM Visited_City WHERE User_id = " + User.id + " AND City_id = " + City_id + ";";
+            bool check = false;
+            try
+            {
+                Connection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        check = Convert.ToBoolean(reader.GetInt32(0));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+
+                Connection.Close();
+            }
+            return check;
+        }
 
 
-       
         public DataTable getTableInfo(string query)//Combobox_worker
         {
             Connection.Open();

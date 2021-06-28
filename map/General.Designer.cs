@@ -81,6 +81,7 @@ namespace map
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -311,10 +312,22 @@ namespace map
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(725, 439);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(132, 17);
+            this.checkBox3.TabIndex = 18;
+            this.checkBox3.Text = "Я был в этом городе";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.Click += new System.EventHandler(this.checkBox3_Click);
+            // 
             // General
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1314, 630);
+            this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -365,6 +378,7 @@ namespace map
         private Button button4;
         private Button button5;
         private Button button6;
+        private CheckBox checkBox3;
     }
 }
 

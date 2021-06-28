@@ -36,9 +36,11 @@ namespace map
             groupBox2.Visible = false; //список
             textBox1.Visible = false; //описание города
             button6.Visible = false;
+            checkBox3.Visible = false;
             gMap.Position = new PointLatLng(54.313928, 48.40341);
             gMap.Zoom = 11;
             this.ClientSize = new System.Drawing.Size(970, 470);
+            
         }
         private void button1_Click(object sender, EventArgs e)// погнали  made with quwin
         {
@@ -55,9 +57,11 @@ namespace map
             button6.Location = new System.Drawing.Point(863, 469);
             button5.Visible = false;
             button4.Visible = false;
+            checkBox3.Visible = true;
             gMap.Zoom = 11;
             textBox1.Visible = true; //Описание города
             User.City_id = Convert.ToInt32(comboBox1.SelectedValue);
+            checkBox3.Checked = db.Visited_Check_City(User.City_id);
             gMap.Position = db.Cordinates(Convert.ToInt32(comboBox1.SelectedValue));
             Information_City();
             
@@ -92,7 +96,7 @@ namespace map
             // Убрать красный крестик по центру
             gMap.ShowCenter = false;
             // Чья карта используется
-            gMap.MapProvider = GMapProviders.YandexMap;
+            gMap.MapProvider = GMapProviders.GoogleMap;
             GMaps.Instance.Mode = AccessMode.ServerOnly;
             // Корды при запуске карыт
         }    
@@ -108,6 +112,7 @@ namespace map
             button3.Visible = false;// сохранить
             groupBox1.Visible = false; //разделы
             groupBox2.Visible = false; //список 
+            checkBox3.Visible = false;
             button5.Visible = true;
             button4.Visible = true;
             checkBox1.Checked = false;
@@ -465,6 +470,12 @@ namespace map
         {
             UsrCab lk = new UsrCab(User.id);
             lk.ShowDialog(); 
+        }
+
+        private void checkBox3_Click(object sender, EventArgs e)
+        {
+            
+            db.Visited_City(User.City_id, checkBox3.Checked);
         }
     }
 }

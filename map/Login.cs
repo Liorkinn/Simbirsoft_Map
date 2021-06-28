@@ -34,7 +34,6 @@ namespace map
             { this.Close(); }
         }
 
-        
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -75,6 +74,7 @@ namespace map
                 password_string.ForeColor = Color.LightGray;
             }
         }
+
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
