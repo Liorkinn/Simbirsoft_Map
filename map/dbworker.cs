@@ -196,15 +196,15 @@ namespace map
 
                     
                     int IDoo = User.id = USER_ID(login);
-                    command.CommandText = "INSERT INTO `Users_Info` (`Users_id`, `secname`, `age`, `about_me`, `gender`,`city`) VALUES (@Users_id_value, @secname_value, @age_value, @about_me_value, @gender_value, @city_value)";
+                    command.CommandText = "INSERT INTO `Users_Info` (`Users_id`, `secname`, `age`, `about_me`, `gender_id`,`city_id`) VALUES (@Users_id_value, @secname_value, @age_value, @about_me_value, @gender_value, @city_value)";
                     string empty = null;
 
                     command.Parameters.Add("@Users_id_value", MySqlDbType.VarChar).Value = IDoo;
                     command.Parameters.Add("@secname_value", MySqlDbType.VarChar).Value = empty;
                     command.Parameters.Add("@age_value", MySqlDbType.VarChar).Value = empty;
                     command.Parameters.Add("@about_me_value", MySqlDbType.VarChar).Value = empty;
-                    command.Parameters.Add("@gender_value", MySqlDbType.VarChar).Value = empty;
-                    command.Parameters.Add("@city_value", MySqlDbType.VarChar).Value = empty;
+                    command.Parameters.Add("@gender_value", MySqlDbType.Int32).Value = empty;
+                    command.Parameters.Add("@city_value", MySqlDbType.Int32).Value = empty;
 
                     
                     if (command.ExecuteNonQuery() == 1)
