@@ -31,6 +31,7 @@ namespace map
 
     public struct Coord
     {
+        public string name;
         public int id;
         public double x;
         public double y;

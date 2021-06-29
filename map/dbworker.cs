@@ -93,7 +93,8 @@ namespace map
         public List<Coord> Food(int id) //метки
         {
             MySqlCommand command = Connection.CreateCommand();
-            command.CommandText = "SELECT X, Y, id FROM a WHERE Place_id = "+ id.ToString() +" and City_id = "+ User.City_id + ";";
+            command.CommandText = "SELECT X, Y, id, Name FROM a WHERE Place_id = "+ id.ToString() +" and City_id = "+ User.City_id + ";";
+         // command.CommandText = "SELECT X, Y, id FROM a WHERE Place_id = "+ id.ToString() +" and City_id = "+ User.City_id + ";";
             List<Coord> bd = new List<Coord>();
             try
             {
@@ -104,9 +105,10 @@ namespace map
                     {
                         Coord databd = new Coord
                         {
-                            id = reader.GetInt32(2),
                             x = reader.GetDouble(0),
                             y = reader.GetDouble(1),
+                            id = reader.GetInt32(2),
+                            name = reader.GetString(3),
                         };
                         bd.Add(databd);
                     }
@@ -346,8 +348,6 @@ namespace map
                 return false;
             }
         }
-
-        ////////////////////////////////////////////////////////////////////
         public string Usr_name(int id)
         {
             Connection.Open();
@@ -390,27 +390,16 @@ namespace map
             Connection.Close();
             return age;
         }
-
+        /////////////////////////////////////////////////////////////////
         public string Usr_city(int id)
         {
             Connection.Open();
             MySqlCommand command = Connection.CreateCommand();
-            command.CommandText = $"SELECT city FROM Users_Info WHERE Users_id = {id}";
+            command.CommandText = $"SELECT City.Name FROM Users_Info JOIN City ON City_id = City.id WHERE Users_id = {id}";
             object value = command.ExecuteScalar();
             string name = Convert.ToString(value);
             Connection.Close();
             return name;
-        }
-
-        public string Usr_PN(int id)
-        {
-            Connection.Open();
-            MySqlCommand command = Connection.CreateCommand();
-            command.CommandText = $"SELECT telephone FROM Users_Info WHERE Users_id = {id}";
-            object value = command.ExecuteScalar();
-            string Telephone = Convert.ToString(value);
-            Connection.Close();
-            return Telephone;
         }
 
         public int Usr_status(int id)
@@ -423,12 +412,12 @@ namespace map
             Connection.Close();
             return status;
         }
-
+        /////////////////////////////////////////////////////////////////
         public string Usr_gender(int id)
         {
             Connection.Open();
             MySqlCommand command = Connection.CreateCommand();
-            command.CommandText = $"SELECT gender FROM Users_Info WHERE Users_id = {id}";
+            command.CommandText = $"SELECT Gender.Name FROM Users_Info JOIN Gender ON gender_id = Gender.id WHERE Users_id = {id}";
             object value = command.ExecuteScalar();
             string gender = Convert.ToString(value);
             Connection.Close();
@@ -492,21 +481,21 @@ namespace map
             command.ExecuteNonQuery();
             Connection.Close();
         }
-
-        public void Set_city(int id, string city)
+        /////////////////////////////////////////////////////////////////
+        public void Set_city(int id, int city_id)
         {
             Connection.Open();
             MySqlCommand command = Connection.CreateCommand();
-            command.CommandText = $"UPDATE Users_Info SET city = '{city}' WHERE  Users_id = {id}";
+            command.CommandText = $"UPDATE Users_Info SET city_id = '{city_id}' WHERE  Users_id = {id}";
             command.ExecuteNonQuery();
             Connection.Close();
         }
-
-        public void Set_gender(int id, string gender)
+        /////////////////////////////////////////////////////////////////
+        public void Set_gender(int id, int gender_id)
         {
             Connection.Open();
             MySqlCommand command = Connection.CreateCommand();
-            command.CommandText = $"UPDATE Users_Info SET gender = '{gender}' WHERE  Users_id = {id}";
+            command.CommandText = $"UPDATE Users_Info SET gender_id = '{gender_id}' WHERE  Users_id = {id}";
             command.ExecuteNonQuery();
             Connection.Close();
         }
@@ -542,20 +531,6 @@ namespace map
             Connection.Close();
             return names;
         }
-
-
-        //public List<string> selectcitys(int id)
-        //{
-        //    Connection.Open();
-        //    MySqlCommand command = Connection.CreateCommand();
-        //    command.CommandText = $"SELECT Attractions.City_id FROM Visited JOIN Attractions ON Attraction_id = Attractions.id WHERE Visited.User_id = {id} JOIN City ON City_id = City.id";
-        //    MySqlDataReader reader = command.ExecuteReader();
-        //    List<string> names = new List<string>();
-        //    while (reader.Read())
-        //        names.Add(reader[0].ToString());
-        //    Connection.Close();
-        //    return names;
-        //}
 
         public List<string> selectattraddress(int id)
         {
@@ -614,8 +589,6 @@ namespace map
             return maxid;
         }
 
-        ////////////////////////////////////////////////////////////////////
-
         public string PointInfo(int id) //вывод мето пользователя
         {
             Connection.Open();
@@ -626,8 +599,6 @@ namespace map
             Connection.Close();
             return PointName;
         }
-
-
 
         public void Visited_City(int City_id, bool da)
         {
@@ -784,6 +755,41 @@ namespace map
                 Connection.Close();
             }
         }
+
+
+
+        //public List<Coord> Name_Markers(int id) //имена
+        //{
+        //    MySqlCommand command = Connection.CreateCommand();
+        //    command.CommandText = "SELECT Attractions.Name FROM Attractions WHERE Place_id = " + id + ";";
+        //    //SELECT Attractions.Name FROM Attractions WHERE Place_id = 1
+        //    List<Coord> bd = new List<Coord>();
+        //    try
+        //    {
+        //        Connection.Open();
+        //        using (DbDataReader reader = command.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                Coord databd = new Coord
+        //                {
+        //                    name = reader.GetString(0),
+        //                };
+        //                bd.Add(databd);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //    finally
+        //    {
+
+        //        Connection.Close();
+        //    }
+        //    return bd;
+        //}
 
 
         // UPDATE `Liorkin`.`Attractions` SET `Name`='s', `Adress`='s', `Information`='s' WHERE  `id`=53;

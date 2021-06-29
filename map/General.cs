@@ -268,7 +268,7 @@ namespace map
                     GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(ListWithPoinsOfFood[i].x, ListWithPoinsOfFood[i].y), new Bitmap(@"Icon/food.png"));
                     marker.ToolTip = new GMapRoundedToolTip(marker);
 
-                    marker.ToolTipText = "Ресторан";
+                    marker.ToolTipText = ListWithPoinsOfFood[i].name;
                     ListOfFood.Markers.Add(marker);
 
                     Point a = new Point(ListWithPoinsOfFood[i], gMap);
@@ -306,7 +306,7 @@ namespace map
                     GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(ListWithPoinsOfPlace[i].x, ListWithPoinsOfPlace[i].y), new Bitmap(@"Icon/statue.png"));
                     marker.ToolTip = new GMapRoundedToolTip(marker);
 
-                    marker.ToolTipText = "Место";
+                    marker.ToolTipText = ListWithPoinsOfPlace[i].name;
                     ListOfPlace.Markers.Add(marker);
 
                     Point a = new Point(ListWithPoinsOfPlace[i], gMap);
@@ -381,7 +381,7 @@ namespace map
                     GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(ListWithPoinsOfHotel[i].x, ListWithPoinsOfHotel[i].y), new Bitmap(@"Icon/hotel.png"));
                     marker.ToolTip = new GMapRoundedToolTip(marker);
 
-                    marker.ToolTipText = "Гостиница";
+                    marker.ToolTipText = ListWithPoinsOfHotel[i].name;
                     ListOfHotel.Markers.Add(marker);
 
                     Point a = new Point(ListWithPoinsOfHotel[i], gMap);
@@ -418,7 +418,7 @@ namespace map
                     GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(ListWithPoinsOfPoster[i].x, ListWithPoinsOfPoster[i].y), new Bitmap(@"Icon/party.png"));
                     marker.ToolTip = new GMapRoundedToolTip(marker);
 
-                    marker.ToolTipText = "Афиша";
+                    marker.ToolTipText = ListWithPoinsOfPoster[i].name;
                     ListOfPoster.Markers.Add(marker);
 
                     Point a = new Point(ListWithPoinsOfPoster[i], gMap);

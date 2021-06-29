@@ -10,28 +10,35 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
+using System.Data.Common;
+
 namespace map
 {
     public partial class RenameProfile : Form
     {
+        dbworker db = new dbworker(bd_CON_VAL.server, bd_CON_VAL.user, bd_CON_VAL.pass, "Liorkin");
 
         int globalid = 0;
         public RenameProfile(int id)
         {
-
-            dbworker db = new dbworker("95.104.192.212", "Liorkin", "lostdox561771", "Liorkin");
             InitializeComponent();
+            comboBox1.DataSource = db.getTableInfo("SELECT id, City.Name FROM City");
+            comboBox1.DisplayMember = "Name";
+            comboBox1.ValueMember = "id";
+
+            comboBox2.DataSource = db.getTableInfo("SELECT id, Gender.Name FROM Gender");
+            comboBox2.DisplayMember = "Name";
+            comboBox2.ValueMember = "id";
+
             NameBox.Text = db.Usr_name(id);
             SurnameBox.Text = db.Usr_surname(id);
             SecnameBox.Text = db.Usr_secname(id);
-            CityBox.Text = db.Usr_city(id);
-            GenderBox.Text = db.Usr_gender(id);
+            //CityBox.Text = db.Usr_city(id);
+            //GenderBox.Text = db.Usr_gender(id);
             AgeBox.Text = db.Usr_age(id);
             AboutMeBox.Text = db.Usr_about(id);
             PasswordBox.Text = db.Usr_password(id);
-            globalid = id;
-            PhoneNumber.Text = db.Usr_PN(id);
-            
+            globalid = id;       
         }
 
         private void SafeAndClose_Click(object sender, EventArgs e)
@@ -74,20 +81,15 @@ namespace map
                 MessageBox.Show("Неверно указан возраст", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
             }
-            else if (!Regex.Match(PhoneNumber.Text, @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$").Success)
-            {
-                MessageBox.Show("Неверно указан номер телефона", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
 
             dbworker db = new dbworker("95.104.192.212", "Liorkin", "lostdox561771", "Liorkin");
             db.Set_password(globalid, PasswordBox.Text.ToString());
             db.Set_aboutme(globalid, AboutMeBox.Text.ToString());
-            db.Set_gender(globalid, GenderBox.Text.ToString());
+            db.Set_gender(globalid, Convert.ToInt32(comboBox2.SelectedValue));
             db.Set_name(globalid, NameBox.Text.ToString());
             db.Set_secname(globalid, SecnameBox.Text.ToString());
             db.Set_surname(globalid, SurnameBox.Text.ToString());
-            db.Set_city(globalid, CityBox.Text.ToString());
+            db.Set_city(globalid, Convert.ToInt32(comboBox1.SelectedValue));
             db.Set_age(globalid, AgeBox.Text.ToString());
             this.Dispose();       
         }
@@ -98,8 +100,6 @@ namespace map
             this.NameBox = new System.Windows.Forms.TextBox();
             this.SurnameBox = new System.Windows.Forms.TextBox();
             this.SecnameBox = new System.Windows.Forms.TextBox();
-            this.CityBox = new System.Windows.Forms.TextBox();
-            this.GenderBox = new System.Windows.Forms.TextBox();
             this.AgeBox = new System.Windows.Forms.TextBox();
             this.PasswordBox = new System.Windows.Forms.TextBox();
             this.AboutMeBox = new System.Windows.Forms.TextBox();
@@ -111,8 +111,8 @@ namespace map
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.PhoneNumber = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // SafeAndExit
@@ -153,24 +153,6 @@ namespace map
             this.SecnameBox.Name = "SecnameBox";
             this.SecnameBox.Size = new System.Drawing.Size(717, 37);
             this.SecnameBox.TabIndex = 21;
-            // 
-            // CityBox
-            // 
-            this.CityBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CityBox.Location = new System.Drawing.Point(255, 217);
-            this.CityBox.Margin = new System.Windows.Forms.Padding(2);
-            this.CityBox.Name = "CityBox";
-            this.CityBox.Size = new System.Drawing.Size(717, 37);
-            this.CityBox.TabIndex = 24;
-            // 
-            // GenderBox
-            // 
-            this.GenderBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GenderBox.Location = new System.Drawing.Point(255, 176);
-            this.GenderBox.Margin = new System.Windows.Forms.Padding(2);
-            this.GenderBox.Name = "GenderBox";
-            this.GenderBox.Size = new System.Drawing.Size(717, 37);
-            this.GenderBox.TabIndex = 23;
             // 
             // AgeBox
             // 
@@ -287,33 +269,30 @@ namespace map
             this.label8.TabIndex = 35;
             this.label8.Text = "О себе ";
             // 
-            // label9
+            // comboBox1
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(9, 345);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(121, 30);
-            this.label9.TabIndex = 38;
-            this.label9.Text = "Телефон";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(255, 221);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 37;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // PhoneNumber
+            // comboBox2
             // 
-            this.PhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PhoneNumber.Location = new System.Drawing.Point(255, 341);
-            this.PhoneNumber.Margin = new System.Windows.Forms.Padding(2);
-            this.PhoneNumber.Name = "PhoneNumber";
-            this.PhoneNumber.Size = new System.Drawing.Size(717, 37);
-            this.PhoneNumber.TabIndex = 37;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(255, 180);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 38;
             // 
             // RenameProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(979, 425);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.PhoneNumber);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label4);
@@ -324,8 +303,6 @@ namespace map
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PasswordBox);
             this.Controls.Add(this.AboutMeBox);
-            this.Controls.Add(this.CityBox);
-            this.Controls.Add(this.GenderBox);
             this.Controls.Add(this.AgeBox);
             this.Controls.Add(this.SecnameBox);
             this.Controls.Add(this.SurnameBox);
@@ -344,8 +321,6 @@ namespace map
         private System.Windows.Forms.TextBox NameBox;
         private System.Windows.Forms.TextBox SurnameBox;
         private System.Windows.Forms.TextBox SecnameBox;
-        private System.Windows.Forms.TextBox CityBox;
-        private System.Windows.Forms.TextBox GenderBox;
         private System.Windows.Forms.TextBox AgeBox;
         private System.Windows.Forms.TextBox PasswordBox;
         private System.Windows.Forms.TextBox AboutMeBox;
@@ -356,8 +331,13 @@ namespace map
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private ComboBox comboBox1;
+        private ComboBox comboBox2;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox PhoneNumber;
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

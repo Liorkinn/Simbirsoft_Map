@@ -14,6 +14,7 @@ using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms.ToolTips;
+
 namespace map
 {
     public partial class Point : UserControl
@@ -26,26 +27,27 @@ namespace map
         {
             Cord = iD;
             List<string> a = db.A(iD.id);
-            InitializeComponent(a[0], a[1], a[2]);
-            id = Convert.ToInt32(a[3]);
+            InitializeComponent();//a[0], a[1], a[2]
+            if (User.id == 0)
+            { checkBox1.Visible = false; }
+            groupBox1.Text = a[0];
+            textBox1.Text = a[1];
+            textBox2.Text = a[3];
+            id = Convert.ToInt32(a[3]); 
             this.Dock = DockStyle.Top;
-            CheckBox1.Checked = db.Visited_Check(id);
+            checkBox1.Checked = db.Visited_Check(id);
             Search = (GMapControl)G;
         }
 
-        private void UserControl1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             Search.Position = new PointLatLng(Cord.x, Cord.y);
             Search.Zoom = 17;
         }
-        private void CheckBox1_Click(object sender, EventArgs e)
+
+        private void checkBox1_Click(object sender, EventArgs e)
         {
-            db.visited(id, CheckBox1.Checked);
+            db.visited(id, checkBox1.Checked);
         }
     }
 }

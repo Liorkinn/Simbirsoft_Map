@@ -276,7 +276,5 @@ MessageBoxIcon.Asterisk);
                 Subscribe.Text = "Подписка: Бизнес";
             }
         }
-
-
     }
 }
