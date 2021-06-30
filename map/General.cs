@@ -31,7 +31,6 @@ namespace map
             gMap.Visible = true;// карта
             button2.Visible = false;//назад
             button3.Visible = false;// сохранить
-            label2.Visible = false; //текст сохранить 
             groupBox1.Visible = false; //разделы
             groupBox2.Visible = false; //список
             textBox1.Visible = false; //описание города
@@ -39,22 +38,21 @@ namespace map
             checkBox3.Visible = false;
             gMap.Position = new PointLatLng(54.313928, 48.40341);
             gMap.Zoom = 11;
-            this.ClientSize = new System.Drawing.Size(970, 470);
+            this.ClientSize = new System.Drawing.Size(975, 460);
             
         }
         private void button1_Click(object sender, EventArgs e)// погнали  made with quwin
         {
-            this.ClientSize = new System.Drawing.Size(1340, 673);
+            this.ClientSize = new System.Drawing.Size(1330, 650);
             comboBox1.Visible = false;//список 7городов и его выбор
             button1.Visible = false;  // погнали
             label1.Visible = false;//выбери город текст
-            label2.Visible = true; //текст сохранить
             gMap.Visible = true;// карта
             button2.Visible = true;//назад
             button3.Visible = true;// сохранить
             groupBox1.Visible = true; //разделы
             groupBox2.Visible = true; //список
-            button6.Location = new System.Drawing.Point(863, 469);
+            button6.Location = new System.Drawing.Point(863, 411);
             button5.Visible = false;
             button4.Visible = false;
             if (User.id == 0) { checkBox3.Visible = false; } else { checkBox3.Visible = true; }
@@ -102,12 +100,11 @@ namespace map
         }    
         private void button2_Click(object sender, EventArgs e) // кнопка назад вернутся к меню выбора города
         {
-            this.ClientSize = new System.Drawing.Size(986, 498);
+            this.ClientSize = new System.Drawing.Size(970, 460);
             gMap.Visible = true;// карта
             comboBox1.Visible = true; //список 7городов и его выбор
             button1.Visible = true; // погнали
             label1.Visible = true; //выбери город текст
-            label2.Visible = false; //текст сохранить
             button2.Visible = false;//назад
             button3.Visible = false;// сохранить
             groupBox1.Visible = false; //разделы
@@ -184,7 +181,7 @@ namespace map
                     "городами страны и зарубежья. Расположен на берегу Куйбышевского водохранилища, в 893 км к юго-востоку от Москвы." +
                     " Население – около 700 тыс. человек. Разделен на 4 района. Имеет радиально-прямоугольную планировку.";
 
-                    image = new Bitmap(@"Icon/Ulskk.png");
+                    image = new Bitmap(@"Icon/Ulsk1.jpg");
                     pictureBox2.Image = image;
                     pictureBox2.Invalidate();
 

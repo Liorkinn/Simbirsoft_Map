@@ -97,7 +97,7 @@ namespace map
             this.All_About.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.All_About.AutoSize = true;
             this.All_About.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.All_About.Location = new System.Drawing.Point(6, 9);
+            this.All_About.Location = new System.Drawing.Point(29, 4);
             this.All_About.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.All_About.Name = "All_About";
             this.All_About.Size = new System.Drawing.Size(358, 29);
@@ -106,20 +106,23 @@ namespace map
             // 
             // RenUser
             // 
-            this.RenUser.Location = new System.Drawing.Point(760, 371);
+            this.RenUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(240)))), ((int)(((byte)(210)))));
+            this.RenUser.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.RenUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RenUser.Location = new System.Drawing.Point(744, 351);
             this.RenUser.Margin = new System.Windows.Forms.Padding(2);
             this.RenUser.Name = "RenUser";
             this.RenUser.Size = new System.Drawing.Size(139, 37);
             this.RenUser.TabIndex = 7;
             this.RenUser.Text = "Редактировать профиль";
-            this.RenUser.UseVisualStyleBackColor = true;
+            this.RenUser.UseVisualStyleBackColor = false;
             this.RenUser.Click += new System.EventHandler(this.RenUser_Click);
             // 
             // TabControl
             // 
             this.TabControl.Controls.Add(this.tabPage1);
             this.TabControl.Controls.Add(this.tabPage2);
-            this.TabControl.Location = new System.Drawing.Point(11, 89);
+            this.TabControl.Location = new System.Drawing.Point(11, 72);
             this.TabControl.Margin = new System.Windows.Forms.Padding(2);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
@@ -140,12 +143,12 @@ namespace map
             // 
             // PlaceBox
             // 
-            this.PlaceBox.BackColor = System.Drawing.SystemColors.Control;
-            this.PlaceBox.Location = new System.Drawing.Point(5, 5);
+            this.PlaceBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.PlaceBox.Location = new System.Drawing.Point(0, 0);
             this.PlaceBox.Margin = new System.Windows.Forms.Padding(2);
             this.PlaceBox.Multiline = true;
             this.PlaceBox.Name = "PlaceBox";
-            this.PlaceBox.Size = new System.Drawing.Size(344, 292);
+            this.PlaceBox.Size = new System.Drawing.Size(354, 298);
             this.PlaceBox.TabIndex = 1;
             // 
             // tabPage2
@@ -174,25 +177,30 @@ namespace map
             // 
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new System.Drawing.Point(749, 271);
+            this.groupBox1.Location = new System.Drawing.Point(720, 117);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(165, 95);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Профиль";
+            this.groupBox1.Text = "Тип подписки";
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(240)))), ((int)(((byte)(210)))));
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(11, 46);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 32);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Изменить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Text = "Изменить подписку";
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBox1
             // 
+            this.comboBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(11, 19);
             this.comboBox1.Name = "comboBox1";
@@ -202,17 +210,18 @@ namespace map
             // Subscribe
             // 
             this.Subscribe.AutoSize = true;
-            this.Subscribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.Subscribe.Location = new System.Drawing.Point(6, 49);
+            this.Subscribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Subscribe.Location = new System.Drawing.Point(727, 94);
             this.Subscribe.Name = "Subscribe";
-            this.Subscribe.Size = new System.Drawing.Size(125, 29);
+            this.Subscribe.Size = new System.Drawing.Size(84, 20);
             this.Subscribe.TabIndex = 12;
             this.Subscribe.Text = "Подписка";
             // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(379, 111);
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.Location = new System.Drawing.Point(374, 94);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(340, 297);
             this.panel1.TabIndex = 13;
@@ -221,7 +230,8 @@ namespace map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(926, 424);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.ClientSize = new System.Drawing.Size(933, 407);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Subscribe);
             this.Controls.Add(this.groupBox1);

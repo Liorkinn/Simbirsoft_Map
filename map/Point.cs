@@ -32,7 +32,7 @@ namespace map
             { checkBox1.Visible = false; }
             groupBox1.Text = a[0];
             textBox1.Text = a[1];
-            textBox2.Text = a[3];
+            textBox2.Text = a[2];
             id = Convert.ToInt32(a[3]); 
             this.Dock = DockStyle.Top;
             checkBox1.Checked = db.Visited_Check(id);

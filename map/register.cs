@@ -199,12 +199,12 @@ namespace map
         {
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.name2 = new System.Windows.Forms.TextBox();
             this.name1 = new System.Windows.Forms.TextBox();
+            this.name2 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.log1 = new System.Windows.Forms.TextBox();
-            this.passw1 = new System.Windows.Forms.TextBox();
             this.passw2 = new System.Windows.Forms.TextBox();
+            this.passw1 = new System.Windows.Forms.TextBox();
+            this.log1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
@@ -214,7 +214,7 @@ namespace map
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(240)))), ((int)(((byte)(210)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(87, 198);
             this.button1.Name = "button1";
@@ -236,15 +236,6 @@ namespace map
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Введите имя и фамилию";
             // 
-            // name2
-            // 
-            this.name2.Location = new System.Drawing.Point(6, 45);
-            this.name2.Name = "name2";
-            this.name2.Size = new System.Drawing.Size(194, 20);
-            this.name2.TabIndex = 7;
-            this.name2.Enter += new System.EventHandler(this.name2_Enter);
-            this.name2.Leave += new System.EventHandler(this.name2_Leave);
-            // 
             // name1
             // 
             this.name1.Location = new System.Drawing.Point(6, 19);
@@ -254,6 +245,15 @@ namespace map
             this.name1.Enter += new System.EventHandler(this.name1_Enter);
             this.name1.Leave += new System.EventHandler(this.name1_Leave);
             this.name1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.name1_MouseMove);
+            // 
+            // name2
+            // 
+            this.name2.Location = new System.Drawing.Point(6, 45);
+            this.name2.Name = "name2";
+            this.name2.Size = new System.Drawing.Size(194, 20);
+            this.name2.TabIndex = 7;
+            this.name2.Enter += new System.EventHandler(this.name2_Enter);
+            this.name2.Leave += new System.EventHandler(this.name2_Leave);
             // 
             // groupBox2
             // 
@@ -267,14 +267,14 @@ namespace map
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Введите логин и пароль";
             // 
-            // log1
+            // passw2
             // 
-            this.log1.Location = new System.Drawing.Point(6, 22);
-            this.log1.Name = "log1";
-            this.log1.Size = new System.Drawing.Size(194, 20);
-            this.log1.TabIndex = 8;
-            this.log1.Enter += new System.EventHandler(this.log1_Enter);
-            this.log1.Leave += new System.EventHandler(this.log1_Leave);
+            this.passw2.Location = new System.Drawing.Point(6, 74);
+            this.passw2.Name = "passw2";
+            this.passw2.Size = new System.Drawing.Size(194, 20);
+            this.passw2.TabIndex = 6;
+            this.passw2.Enter += new System.EventHandler(this.passw2_Enter);
+            this.passw2.Leave += new System.EventHandler(this.passw2_Leave);
             // 
             // passw1
             // 
@@ -285,18 +285,18 @@ namespace map
             this.passw1.Enter += new System.EventHandler(this.passw1_Enter);
             this.passw1.Leave += new System.EventHandler(this.passw1_Leave);
             // 
-            // passw2
+            // log1
             // 
-            this.passw2.Location = new System.Drawing.Point(6, 74);
-            this.passw2.Name = "passw2";
-            this.passw2.Size = new System.Drawing.Size(194, 20);
-            this.passw2.TabIndex = 6;
-            this.passw2.Enter += new System.EventHandler(this.passw2_Enter);
-            this.passw2.Leave += new System.EventHandler(this.passw2_Leave);
+            this.log1.Location = new System.Drawing.Point(6, 22);
+            this.log1.Name = "log1";
+            this.log1.Size = new System.Drawing.Size(194, 20);
+            this.log1.TabIndex = 8;
+            this.log1.Enter += new System.EventHandler(this.log1_Enter);
+            this.log1.Leave += new System.EventHandler(this.log1_Leave);
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(240)))), ((int)(((byte)(210)))));
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(12, 198);
             this.button2.Name = "button2";
@@ -308,7 +308,7 @@ namespace map
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
