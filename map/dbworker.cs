@@ -195,7 +195,7 @@ namespace map
                     MessageBox.Show("Аккаунт успешно создан!");
 
                     
-                    int IDoo = User.id = USER_ID(login);
+                    int IDoo = USER_ID(login);
                     command.CommandText = "INSERT INTO `Users_Info` (`Users_id`, `secname`, `age`, `about_me`, `gender_id`,`city_id`) VALUES (@Users_id_value, @secname_value, @age_value, @about_me_value, @gender_value, @city_value)";
                     string empty = null;
 
@@ -212,7 +212,6 @@ namespace map
                     }
 
                 }
-
                 else
                     MessageBox.Show("Error");
 
@@ -269,8 +268,6 @@ namespace map
             }
         }
 
-
-
         public void download(int Place_id, int City_id, string name, string adress, string info, double x, double y)
         {
 
@@ -305,8 +302,6 @@ namespace map
             command.Parameters.Add("?Adress", MySqlDbType.VarChar).Value = adress;
             command.Parameters.Add("?Information", MySqlDbType.VarChar).Value = info;
 
-
-
             try
             {
                 Connection.Open();
@@ -340,6 +335,7 @@ namespace map
             if (table.Rows.Count > 0)
             {
                 MessageBox.Show("Логин занят!");
+                Connection.Close();
                 return true;
             }
             else
@@ -348,6 +344,7 @@ namespace map
                 return false;
             }
         }
+
         public string Usr_name(int id)
         {
             Connection.Open();
@@ -358,6 +355,7 @@ namespace map
             Connection.Close();
             return name;
         }
+
         public string Usr_surname(int id)
         {
             Connection.Open();
