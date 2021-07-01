@@ -17,7 +17,7 @@ namespace map
     public partial class RenameProfile : Form
     {
         dbworker db = new dbworker(bd_CON_VAL.server, bd_CON_VAL.user, bd_CON_VAL.pass, "Liorkin");
-
+        private Label label9;
         int globalid = 0;
         public RenameProfile(int id)
         {
@@ -42,26 +42,9 @@ namespace map
         }
 
         private void SafeAndClose_Click(object sender, EventArgs e)
-        { 
+        {
 
-            if (!Regex.Match(NameBox.Text, @"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$").Success)
-            {
-                MessageBox.Show("Имя не должно содержить цифр и символов!(кроме необходимых) )", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-            if (!Regex.Match(SurnameBox.Text, @"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$").Success)
-            {
-                MessageBox.Show("Фамилия не должна содержить цифр и символов!(кроме необходимых) )", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-
-            }
-            else if (!Regex.Match(PasswordBox.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]").Success)
-            {
-                MessageBox.Show("Пароль должен содержать цифры, буквы верхнего и нижнего регистра", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-
-            else if ((NameBox.Text.Length < 2) || (NameBox.Text.Length > 50))
+            if ((NameBox.Text.Length < 2) || (NameBox.Text.Length > 50))
             {
                 MessageBox.Show("Неверная длина имени!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
@@ -76,7 +59,24 @@ namespace map
                 MessageBox.Show("Неверная длина пароля!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
             }
-            else if (!Regex.Match(AgeBox.Text, @"^(?:1[01][0-9]|120|1[7-9]|[2-9][0-9])$").Success)
+            else if (!Regex.Match(NameBox.Text, @"^[\w'\-,.][^0-9_!¡№,.^“?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]").Success)
+            {
+                MessageBox.Show("Имя не должно содержить цифр и символов!(кроме необходимых) )", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+            
+            if (!Regex.Match(SurnameBox.Text, @"^[\w'\-,.][^0-9_!¡№,.^“?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]").Success)
+            {
+                MessageBox.Show("Фамилия не должна содержить цифр и символов!(кроме необходимых) )", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+
+            }
+            else if (!Regex.Match(PasswordBox.Text, @"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{7,16}$").Success)
+            {
+                MessageBox.Show("Пароль должен содержать цифры, буквы верхнего и нижнего регистра", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+            else if (!Regex.Match(AgeBox.Text, @"^(?:1[01][0-9]|120|1[8-9]|[2-9][0-9])$").Success)
             {
                 MessageBox.Show("Неверно указан возраст", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
@@ -113,16 +113,17 @@ namespace map
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SafeAndExit
             // 
             this.SafeAndExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(240)))), ((int)(((byte)(210)))));
             this.SafeAndExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SafeAndExit.Location = new System.Drawing.Point(168, 258);
-            this.SafeAndExit.Margin = new System.Windows.Forms.Padding(2);
+            this.SafeAndExit.Location = new System.Drawing.Point(251, 318);
+            this.SafeAndExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SafeAndExit.Name = "SafeAndExit";
-            this.SafeAndExit.Size = new System.Drawing.Size(465, 30);
+            this.SafeAndExit.Size = new System.Drawing.Size(593, 37);
             this.SafeAndExit.TabIndex = 18;
             this.SafeAndExit.Text = "Сохранить изменения";
             this.SafeAndExit.UseVisualStyleBackColor = false;
@@ -131,87 +132,84 @@ namespace map
             // NameBox
             // 
             this.NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NameBox.Location = new System.Drawing.Point(168, 10);
-            this.NameBox.Margin = new System.Windows.Forms.Padding(2);
+            this.NameBox.Location = new System.Drawing.Point(251, 12);
+            this.NameBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NameBox.Name = "NameBox";
-            this.NameBox.Size = new System.Drawing.Size(465, 26);
+            this.NameBox.Size = new System.Drawing.Size(592, 30);
             this.NameBox.TabIndex = 19;
             // 
             // SurnameBox
             // 
             this.SurnameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SurnameBox.Location = new System.Drawing.Point(168, 40);
-            this.SurnameBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SurnameBox.Location = new System.Drawing.Point(251, 49);
+            this.SurnameBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SurnameBox.Name = "SurnameBox";
-            this.SurnameBox.Size = new System.Drawing.Size(465, 26);
+            this.SurnameBox.Size = new System.Drawing.Size(592, 30);
             this.SurnameBox.TabIndex = 20;
             // 
             // SecnameBox
             // 
             this.SecnameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SecnameBox.Location = new System.Drawing.Point(168, 70);
-            this.SecnameBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SecnameBox.Location = new System.Drawing.Point(251, 86);
+            this.SecnameBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SecnameBox.Name = "SecnameBox";
-            this.SecnameBox.Size = new System.Drawing.Size(465, 26);
+            this.SecnameBox.Size = new System.Drawing.Size(592, 30);
             this.SecnameBox.TabIndex = 21;
             // 
             // AgeBox
             // 
             this.AgeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AgeBox.Location = new System.Drawing.Point(168, 100);
-            this.AgeBox.Margin = new System.Windows.Forms.Padding(2);
+            this.AgeBox.Location = new System.Drawing.Point(251, 123);
+            this.AgeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AgeBox.Name = "AgeBox";
-            this.AgeBox.Size = new System.Drawing.Size(465, 26);
+            this.AgeBox.Size = new System.Drawing.Size(592, 30);
             this.AgeBox.TabIndex = 22;
             // 
             // PasswordBox
             // 
             this.PasswordBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PasswordBox.Location = new System.Drawing.Point(168, 228);
-            this.PasswordBox.Margin = new System.Windows.Forms.Padding(2);
+            this.PasswordBox.Location = new System.Drawing.Point(251, 281);
+            this.PasswordBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PasswordBox.Name = "PasswordBox";
-            this.PasswordBox.Size = new System.Drawing.Size(465, 26);
+            this.PasswordBox.Size = new System.Drawing.Size(592, 30);
             this.PasswordBox.TabIndex = 27;
             // 
             // AboutMeBox
             // 
             this.AboutMeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AboutMeBox.Location = new System.Drawing.Point(168, 198);
-            this.AboutMeBox.Margin = new System.Windows.Forms.Padding(2);
+            this.AboutMeBox.Location = new System.Drawing.Point(251, 244);
+            this.AboutMeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AboutMeBox.Name = "AboutMeBox";
-            this.AboutMeBox.Size = new System.Drawing.Size(465, 26);
+            this.AboutMeBox.Size = new System.Drawing.Size(592, 30);
             this.AboutMeBox.TabIndex = 26;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(11, 16);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(15, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 20);
+            this.label1.Size = new System.Drawing.Size(62, 25);
             this.label1.TabIndex = 28;
-            this.label1.Text = "Имя";
+            this.label1.Text = "Имя*";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(11, 46);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(15, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 20);
+            this.label2.Size = new System.Drawing.Size(111, 25);
             this.label2.TabIndex = 29;
-            this.label2.Text = "Фамилия";
+            this.label2.Text = "Фамилия*";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(11, 76);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(15, 94);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 20);
+            this.label3.Size = new System.Drawing.Size(104, 25);
             this.label3.TabIndex = 30;
             this.label3.Text = "Отчество";
             // 
@@ -219,43 +217,39 @@ namespace map
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(11, 173);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(15, 213);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(152, 20);
+            this.label4.Size = new System.Drawing.Size(196, 25);
             this.label4.TabIndex = 33;
-            this.label4.Text = "Город проживания";
+            this.label4.Text = "Город проживания*";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(11, 139);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(15, 171);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 20);
+            this.label5.Size = new System.Drawing.Size(57, 25);
             this.label5.TabIndex = 32;
-            this.label5.Text = "Пол";
+            this.label5.Text = "Пол*";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(11, 106);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(15, 130);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 20);
+            this.label6.Size = new System.Drawing.Size(97, 25);
             this.label6.TabIndex = 31;
-            this.label6.Text = "Возраст";
+            this.label6.Text = "Возраст*";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(11, 234);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(15, 286);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(152, 20);
+            this.label7.Size = new System.Drawing.Size(191, 25);
             this.label7.TabIndex = 36;
             this.label7.Text = "Изменение пароля";
             // 
@@ -263,21 +257,21 @@ namespace map
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(11, 204);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Location = new System.Drawing.Point(15, 251);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(64, 20);
+            this.label8.Size = new System.Drawing.Size(75, 25);
             this.label8.TabIndex = 35;
-            this.label8.Text = "О себе ";
+            this.label8.Text = "О себе";
             // 
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(168, 165);
+            this.comboBox1.Location = new System.Drawing.Point(251, 203);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(465, 28);
+            this.comboBox1.Size = new System.Drawing.Size(592, 33);
             this.comboBox1.TabIndex = 37;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -286,16 +280,27 @@ namespace map
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(168, 131);
+            this.comboBox2.Location = new System.Drawing.Point(251, 161);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(465, 28);
+            this.comboBox2.Size = new System.Drawing.Size(592, 33);
             this.comboBox2.TabIndex = 38;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(-1, 331);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(246, 17);
+            this.label9.TabIndex = 39;
+            this.label9.Text = "* Поля обязательные к заполнению";
             // 
             // RenameProfile
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 301);
+            this.ClientSize = new System.Drawing.Size(855, 370);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label7);
@@ -314,7 +319,7 @@ namespace map
             this.Controls.Add(this.NameBox);
             this.Controls.Add(this.SafeAndExit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "RenameProfile";
             this.Text = "Редактировать профиль";
             this.ResumeLayout(false);

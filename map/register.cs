@@ -142,8 +142,27 @@ namespace map
                 }
 
             }
-
-            if (!Regex.Match(name1.Text, @"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,50}$").Success)
+            if ((name1.Text.Length < 2) || (name1.Text.Length > 50))
+            {
+                MessageBox.Show("Неверная длина имени!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+            else if ((name2.Text.Length < 2) || (name2.Text.Length > 50))
+            {
+                MessageBox.Show("Неверная длина фамилии!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+            else if ((log1.Text.Length < 4) || (log1.Text.Length > 20))
+            {
+                MessageBox.Show("Неверная длина логина!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+            else if ((passw1.Text.Length < 8) || (passw1.Text.Length > 15))
+            {
+                MessageBox.Show("Неверная длина пароля!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+            else if (!Regex.Match(name1.Text, @"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,50}$").Success)
             {
                 MessageBox.Show("Имя не должно содержить цифр и символов!(кроме необходимых) )", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
@@ -172,26 +191,7 @@ namespace map
             {
                 return;
             }
-            else if ((name1.Text.Length < 2) || (name1.Text.Length > 50))
-            {
-                MessageBox.Show("Неверная длина имени!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-            else if ((name2.Text.Length < 2) || (name2.Text.Length > 50))
-            {
-                MessageBox.Show("Неверная длина фамилии!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-            else if ((log1.Text.Length < 4) || (log1.Text.Length > 20))
-            {
-                MessageBox.Show("Неверная длина логина!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-            else if ((passw1.Text.Length < 8) || (passw1.Text.Length > 15))
-            {
-                MessageBox.Show("Неверная длина пароля!", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
+           
             db.Add_User(name1.Text, name2.Text, log1.Text, passw1.Text, passw2.Text, 1);
         }
 
@@ -244,7 +244,6 @@ namespace map
             this.name1.TabIndex = 3;
             this.name1.Enter += new System.EventHandler(this.name1_Enter);
             this.name1.Leave += new System.EventHandler(this.name1_Leave);
-            this.name1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.name1_MouseMove);
             // 
             // name2
             // 
@@ -336,13 +335,6 @@ namespace map
             this.ResumeLayout(false);
 
         }
-
-        private void name1_MouseMove(object sender, MouseEventArgs e)
-        {
-            ToolTip help = new ToolTip();
-            help.SetToolTip(this.name1, "Сдесь и в остальных полях будет написано как заполнять");
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();

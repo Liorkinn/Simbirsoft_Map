@@ -438,10 +438,14 @@ namespace map
         }
         private void gMap_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if ((User.id != 0)&& button2.Visible)
+            if ((User.id != 0) && (User.lvl != 1) && button2.Visible)
             {
                 Markers a = new Markers(gMap.FromLocalToLatLng(e.X, e.Y).Lng, gMap.FromLocalToLatLng(e.X, e.Y).Lat);
                 a.ShowDialog();
+            }
+            else 
+            {
+                MessageBox.Show("Для размещения объекта необходимо оформить подписку \"Арендодатель\" или \"Бизнес\" ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

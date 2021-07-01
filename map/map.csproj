@@ -139,6 +139,11 @@
     <Compile Include="RenameProfile.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RenameProfile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RenameProfile.resx</DependentUpon>
+    </Compile>
     <Compile Include="UsrCab.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +201,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icon1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
